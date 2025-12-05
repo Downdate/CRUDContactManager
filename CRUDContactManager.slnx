@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CRUDContactManager/CRUDContactManager.csproj" />
+  <Project Path="Entities/Entities.csproj" Id="b2ef7eff-7aeb-4cd9-a9d2-3e23ee3cc458" />
+  <Project Path="ServiceContracts/ServiceContracts.csproj" Id="58977b1d-f88a-494a-bc51-f408cebac155" />
+  <Project Path="Services/Services.csproj" Id="af079ed9-1fd3-4b10-a0d6-4b39bac59801" />
+  <Project Path="Tests/Tests.csproj" Id="5684a809-0d74-486b-92b8-f36237d5ad91" />
+</Solution>
