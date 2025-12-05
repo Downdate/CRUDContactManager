@@ -110,7 +110,47 @@ namespace Services
         /// <exception cref="NotImplementedException">The method is not implemented.</exception>
         public List<PersonResponse> GetFilteredPersonsList(string searchBy, string? searchString)
         {
-            throw new NotImplementedException();
+            List<PersonResponse> allPersons = GetPersonList();
+            List<PersonResponse> filteredPersons = allPersons;
+
+            if (string.IsNullOrEmpty(searchBy) || string.IsNullOrEmpty(searchString))
+            {
+                return allPersons;
+            }
+
+            switch (searchBy)
+            {
+                case nameof(Person.Name):
+                    filteredPersons = allPersons.Where(temp => temp.Name != null && temp.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+                    break;
+
+                case nameof(Person.EmailAddress):
+                    filteredPersons = allPersons.Where(temp => temp.EmailAddress != null && temp.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+                    break;
+
+                case nameof(Person.DateOfBirth):
+                    filteredPersons = allPersons.Where(temp => temp.DateOfBirth != null && temp.DateOfBirth.ToString()!.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+                    break;
+
+                case nameof(Person.Gender):
+                    filteredPersons = allPersons.Where(temp => (!string.IsNullOrEmpty(temp.Gender.ToString())) ?
+                    temp.Gender.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase) : true).ToList();
+                    break;
+
+                case nameof(Person.Address):
+                    filteredPersons = allPersons.Where(temp => temp.Address != null && temp.Address.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
+                    break;
+
+                case nameof(Person.CountryID):
+                    filteredPersons = allPersons.Where(temp => (!string.IsNullOrEmpty(temp.CountryName)) ?
+                    temp.CountryName.Contains(searchString, StringComparison.OrdinalIgnoreCase) : true).ToList();
+                    break;
+
+                default:
+                    filteredPersons = allPersons;
+                    break;
+            }
+            return filteredPersons;
         }
     }
 }

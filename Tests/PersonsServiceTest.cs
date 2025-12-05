@@ -252,6 +252,38 @@ namespace Tests
             }
         }
 
+        // if proper searchString is given, it should return matching persons
+
+        [Fact]
+        public void GetFilteredPersonsList_ProperSearching()
+        {
+            //Arrange
+            List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
+            //Act
+            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersonsList(nameof(Person.Name), "Mr");
+
+            // print allPersons
+
+            _testOutputHelper.WriteLine("actual: ");
+
+            foreach (PersonResponse pr in allPersons_from_Search)
+            {
+                _testOutputHelper.WriteLine(pr.ToString());
+            }
+
+            //Assert
+            foreach (PersonResponse personResponse in personResponses_fromAdditions)
+            {
+                if (personResponse.Name != null)
+                {
+                    if (personResponse.Name.Contains("ma", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Assert.Contains(personResponse, allPersons_from_Search);
+                    }
+                }
+            }
+        }
+
         #endregion GetFilteredPersonsList
     }
 }
