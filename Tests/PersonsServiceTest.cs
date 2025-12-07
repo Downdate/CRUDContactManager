@@ -422,7 +422,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersonsList(nameof(Person.Name), "Mr");
+            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersonsList(nameof(Person.Name), "John");
 
             // print allPersons
 
@@ -438,7 +438,7 @@ namespace Tests
             {
                 if (personResponse.Name != null)
                 {
-                    if (personResponse.Name.Contains("ma", StringComparison.OrdinalIgnoreCase))
+                    if (personResponse.Name.Contains("John", StringComparison.OrdinalIgnoreCase))
                     {
                         Assert.Contains(personResponse, allPersons_from_Search);
                     }
