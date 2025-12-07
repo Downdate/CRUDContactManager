@@ -89,7 +89,7 @@ namespace Tests
 
             foreach (CountryAddRequest countryAddRequest in countriesList)
             {
-                countriesAdded.Add(_countriesService.AddCountry(countryAddRequest));
+                countries.Add(_countriesService.AddCountry(countryAddRequest));
             }
             // ------------------------------------------------------------
             // HARD-CODED 100 PEOPLE
