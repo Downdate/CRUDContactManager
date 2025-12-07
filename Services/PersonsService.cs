@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using Services.Helpers;
+using ServiceContracts.Enums;
 
 namespace Services
 {
@@ -151,6 +152,11 @@ namespace Services
                     break;
             }
             return filteredPersons;
+        }
+
+        public List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder)
+        {
+            throw new NotImplementedException();
         }
     }
 }
