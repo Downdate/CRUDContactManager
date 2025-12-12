@@ -317,10 +317,9 @@ namespace Tests
         {
             //Arrange
             Guid? personID = null;
-            //Act
-            PersonResponse? personResponse = _PersonsService.GetPersonByPersonID(personID);
-            //Assert
-            Assert.Null(personResponse);
+
+            //Act , Assert
+            Assert.Throws<ArgumentNullException>(() => _PersonsService.GetPersonByPersonID(personID));
         }
 
         //if personID is valid, should return valid person
@@ -551,5 +550,44 @@ namespace Tests
         }
 
         #endregion UpdatePerson
+
+        #region DeletePerson
+
+        //if personID is null , it should throw argumentNullException
+        [Fact]
+        public void DeletePerson_PersonIDNull()
+        {
+            //Arrange
+            Guid? personID = null;
+            //Act & Assert
+            Assert.Throws<ArgumentNullException>(() => _PersonsService.DeletePerson(personID));
+        }
+
+        //if personID is invalid, it should throw argumentException
+        [Fact]
+        public void DeletePerson_InvalidPersonID()
+        {
+            //Arrange
+            AddSamplePersons();
+            Guid personID = Guid.NewGuid();
+            //Act & Assert
+            Assert.Throws<ArgumentException>(() => _PersonsService.DeletePerson(personID));
+        }
+
+        //if personID is valid, it should delete the person
+        [Fact]
+        public void DeletePerson_ValidPersonID()
+        {
+            //Arrange
+            List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
+            PersonResponse personToDelete = personResponses_fromAdditions[0];
+            //Act
+            _PersonsService.DeletePerson(personToDelete.ID);
+            List<PersonResponse> allPersons = _PersonsService.GetPersonList();
+            //Assert
+            Assert.DoesNotContain(personToDelete, allPersons);
+        }
+
+        #endregion DeletePerson
     }
 }

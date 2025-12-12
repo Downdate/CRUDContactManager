@@ -86,14 +86,14 @@ namespace Services
         {
             if (personID == null)
             {
-                return null;
+                throw new ArgumentNullException(nameof(personID));
             }
 
             Person? person = _personsList.FirstOrDefault(temp => temp.ID == personID);
 
             if (person == null)
             {
-                return null;
+                throw new ArgumentException("person with given ID not found, ID invalid");
             }
 
             return person.ToPersonResponse();
@@ -229,6 +229,25 @@ namespace Services
             matchingPerson.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
 
             return matchingPerson.ToPersonResponse();
+        }
+
+        public PersonResponse DeletePerson(Guid? PersonID)
+        {
+            if (PersonID == null)
+            {
+                throw new ArgumentNullException(nameof(PersonID));
+            }
+
+            Person? machingPerson = _personsList.FirstOrDefault(temp => temp.ID == PersonID);
+
+            if (machingPerson == null)
+            {
+                throw new ArgumentException("invalid personID");
+            }
+
+            _personsList.Remove(machingPerson);
+
+            return machingPerson.ToPersonResponse();
         }
     }
 }

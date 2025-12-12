@@ -56,6 +56,13 @@ namespace ServiceContracts
         /// empty list.</returns>
         List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder);
 
+        /// <summary>
+        /// Updates the details of an existing person using the specified update request.
+        /// </summary>
+        /// <param name="personUpdateRequest">An object containing the updated information for the person. Cannot be null.</param>
+        /// <returns>A PersonResponse object containing the updated details of the person.</returns>
         PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest);
+
+        PersonResponse DeletePerson(Guid? PersonID);
     }
 }
