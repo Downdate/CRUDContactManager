@@ -206,6 +206,10 @@ namespace Services
             {
                 throw new ArgumentException("Person name cannot be null or empty.", nameof(personUpdateRequest));
             }
+            if (string.IsNullOrEmpty(personUpdateRequest.EmailAddress))
+            {
+                throw new ArgumentException("Person EmailAddress cannot be null or empty.", nameof(personUpdateRequest));
+            }
             foreach (PersonResponse person in allPersons)
             {
                 if (person.ID == personUpdateRequest.ID)
