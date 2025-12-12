@@ -196,7 +196,6 @@ namespace Services
         /// <exception cref="ArgumentException">Thrown if personUpdateRequest.Name is null or empty, or if no person with the specified ID exists.</exception>
         public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
         {
-            List<PersonResponse> allPersons = GetPersonList();
             if (personUpdateRequest == null)
             {
                 throw new ArgumentNullException(nameof(personUpdateRequest));
@@ -210,21 +209,26 @@ namespace Services
             {
                 throw new ArgumentException("Person EmailAddress cannot be null or empty.", nameof(personUpdateRequest));
             }
-            foreach (PersonResponse person in allPersons)
+
+            //validation
+            ValidationHelper.ModelValidation(personUpdateRequest);
+
+            Person? matchingPerson = _personsList.FirstOrDefault(temp => temp.ID == personUpdateRequest.ID);
+
+            if (matchingPerson == null)
             {
-                if (person.ID == personUpdateRequest.ID)
-                {
-                    person.Name = personUpdateRequest.Name;
-                    person.EmailAddress = personUpdateRequest.EmailAddress;
-                    person.DateOfBirth = personUpdateRequest.DateOfBirth;
-                    person.Gender = personUpdateRequest.Gender;
-                    person.Address = personUpdateRequest.Address;
-                    person.CountryID = personUpdateRequest.CountryID;
-                    person.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
-                    return person;
-                }
+                throw new ArgumentException("Person not found, Invalid Person ID");
             }
-            throw new ArgumentException("Person not found, Invalid Person ID");
+
+            matchingPerson.Name = personUpdateRequest.Name;
+            matchingPerson.EmailAddress = personUpdateRequest.EmailAddress;
+            matchingPerson.DateOfBirth = personUpdateRequest.DateOfBirth;
+            matchingPerson.Address = personUpdateRequest.Address;
+            matchingPerson.Gender = personUpdateRequest.Gender.ToString();
+            matchingPerson.CountryID = personUpdateRequest.CountryID;
+            matchingPerson.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
+
+            return matchingPerson.ToPersonResponse();
         }
     }
 }
