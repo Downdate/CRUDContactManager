@@ -29,6 +29,15 @@ namespace Tests
             _testOutputHelper = testOutputHelper;
         }
 
+        /// <summary>
+        /// Adds a predefined set of sample countries and persons to the underlying data store and returns the resulting
+        /// person records.
+        /// </summary>
+        /// <remarks>This method is intended for populating the data store with a consistent set of test
+        /// data, typically for use in testing or demonstration scenarios. The countries and persons added are
+        /// hard-coded and cover a variety of names and locations.</remarks>
+        /// <returns>A list of <see cref="PersonResponse"/> objects representing the persons that were added. The list contains
+        /// one entry for each sample person.</returns>
         private List<PersonResponse> AddSamplePersons()
         {
             List<CountryAddRequest> countriesList = new List<CountryAddRequest>()
@@ -474,5 +483,73 @@ namespace Tests
         }
 
         #endregion GetSortedPersons
+
+        #region UpdatePerson
+
+        //When we supply with null value as PersonUpdateRequest it should throw argumentNullException
+        [Fact]
+        public void UpdatePerson_NullPersonUpdateRequest()
+        {
+            //Arrange
+            PersonUpdateRequest? personUpdateRequest = null;
+            //Act & Assert
+            Assert.Throws<ArgumentNullException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
+        }
+
+        // When we supply with null value as PersonName it should throw argumentException
+        [Fact]
+        public void UpdatePerson_PersonNameNull()
+        {
+            //Arrange
+            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { Name = null };
+            //Act & Assert
+            Assert.Throws<ArgumentException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
+        }
+
+        // When we supply with invalid PersonID it should throw argumentException
+        [Fact]
+        public void UpdatePerson_InvalidPersonID()
+        {
+            //Arrange
+            AddSamplePersons();
+            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { ID = Guid.NewGuid(), Name = "Mr.house" };
+            //Act & Assert
+            Assert.Throws<ArgumentException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
+        }
+
+        //proper update should update the person details
+        [Fact]
+        public void UpdatePerson_ProperPersonDetails()
+        {
+            //Arrange
+            List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
+            PersonResponse personToUpdate = personResponses_fromAdditions[0];
+            PersonResponse CountryIDPerson = personResponses_fromAdditions[1];
+            PersonUpdateRequest personUpdateRequest = new PersonUpdateRequest()
+            {
+                ID = personToUpdate.ID,
+                Name = "Updated Name",
+                Address = "Updated Address",
+                DateOfBirth = new DateTime(2000, 1, 1),
+                CountryID = CountryIDPerson.CountryID,
+                EmailAddress = "UpdatedEmail@gmail.com",
+                Gender = GenderOptions.Female,
+                ReceiveNewsLetters = !personToUpdate.ReceiveNewsLetters,
+            };
+            //Act
+            PersonResponse person_Response_From_Update = _PersonsService.UpdatePerson(personUpdateRequest);
+
+            //Assert
+            Assert.Equal(personUpdateRequest.ID, person_Response_From_Update.ID);
+            Assert.NotEqual(personUpdateRequest.Name, personToUpdate.Name);
+            Assert.NotEqual(personUpdateRequest.Address, personToUpdate.Address);
+            Assert.NotEqual(personUpdateRequest.DateOfBirth, personToUpdate.DateOfBirth);
+            Assert.NotEqual(personUpdateRequest.EmailAddress, personToUpdate.EmailAddress);
+            Assert.NotEqual(personUpdateRequest.Gender, personToUpdate.Gender);
+            Assert.NotEqual(personUpdateRequest.CountryID, personToUpdate.CountryID);
+            Assert.NotEqual(personUpdateRequest.ReceiveNewsLetters, personToUpdate.ReceiveNewsLetters);
+        }
+
+        #endregion UpdatePerson
     }
 }

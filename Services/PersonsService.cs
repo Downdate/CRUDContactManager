@@ -185,5 +185,42 @@ namespace Services
 
             return sortedPersons;
         }
+
+        /// <summary>
+        /// Updates the details of an existing person with the values provided in the specified update request.
+        /// </summary>
+        /// <param name="personUpdateRequest">An object containing the updated information for the person. Must not be null, and the Name property must
+        /// not be null or empty.</param>
+        /// <returns>A PersonResponse object representing the updated person.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if personUpdateRequest is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if personUpdateRequest.Name is null or empty, or if no person with the specified ID exists.</exception>
+        public PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest)
+        {
+            List<PersonResponse> allPersons = GetPersonList();
+            if (personUpdateRequest == null)
+            {
+                throw new ArgumentNullException(nameof(personUpdateRequest));
+            }
+
+            if (string.IsNullOrEmpty(personUpdateRequest.Name))
+            {
+                throw new ArgumentException("Person name cannot be null or empty.", nameof(personUpdateRequest));
+            }
+            foreach (PersonResponse person in allPersons)
+            {
+                if (person.ID == personUpdateRequest.ID)
+                {
+                    person.Name = personUpdateRequest.Name;
+                    person.EmailAddress = personUpdateRequest.EmailAddress;
+                    person.DateOfBirth = personUpdateRequest.DateOfBirth;
+                    person.Gender = personUpdateRequest.Gender;
+                    person.Address = personUpdateRequest.Address;
+                    person.CountryID = personUpdateRequest.CountryID;
+                    person.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
+                    return person;
+                }
+            }
+            throw new ArgumentException("Person not found, Invalid Person ID");
+        }
     }
 }

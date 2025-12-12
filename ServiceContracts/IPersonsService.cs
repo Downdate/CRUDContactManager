@@ -55,5 +55,7 @@ namespace ServiceContracts
         /// <returns>A new list of persons sorted by the specified property and order. If the input list is empty, returns an
         /// empty list.</returns>
         List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder);
+
+        PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest);
     }
 }
