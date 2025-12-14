@@ -17,7 +17,7 @@ namespace Tests
 
         public CountriesServiceTest()
         {
-            _CountriesService = new CountriesService();
+            _CountriesService = new CountriesService(false);
         }
 
         #region AddCountry

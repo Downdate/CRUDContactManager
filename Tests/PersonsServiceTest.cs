@@ -24,8 +24,8 @@ namespace Tests
 
         public PersonsServiceTest(ITestOutputHelper testOutputHelper)
         {
-            _PersonsService = new PersonsService();
-            _countriesService = new CountriesService();
+            _PersonsService = new PersonsService(false);
+            _countriesService = new CountriesService(false);
             _testOutputHelper = testOutputHelper;
         }
 
