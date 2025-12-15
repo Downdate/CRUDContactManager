@@ -207,7 +207,7 @@ namespace Services
             _personsList.Add(person);
 
             //convert to PersonResponse
-            return person.ToPersonResponse();
+            return ConvertPersonIntoPersonResponse(person);
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Services
                 return new List<PersonResponse>();
             }
 
-            return _personsList.Select(temp => temp.ToPersonResponse()).ToList();
+            return _personsList.Select(temp => ConvertPersonIntoPersonResponse(temp)).ToList();
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Services
                 throw new ArgumentException("person with given ID not found, ID invalid");
             }
 
-            return person.ToPersonResponse();
+            return ConvertPersonIntoPersonResponse(person);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace Services
             matchingPerson.CountryID = personUpdateRequest.CountryID;
             matchingPerson.ReceiveNewsLetters = personUpdateRequest.ReceiveNewsLetters;
 
-            return matchingPerson.ToPersonResponse();
+            return ConvertPersonIntoPersonResponse(matchingPerson);
         }
 
         public PersonResponse DeletePerson(Guid? PersonID)
@@ -395,7 +395,7 @@ namespace Services
 
             _personsList.Remove(machingPerson);
 
-            return machingPerson.ToPersonResponse();
+            return ConvertPersonIntoPersonResponse(machingPerson);
         }
     }
 }

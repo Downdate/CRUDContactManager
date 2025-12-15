@@ -121,13 +121,8 @@ namespace Services
             }
 
             List<CountryResponse> allCountries = GetAllCountries();
-            foreach (CountryResponse country in allCountries)
-            {
-                if (country.CountryID == countryID)
-                {
-                    return country;
-                }
-            }
+            CountryResponse? country = allCountries.Find(temp => temp.CountryID == countryID);
+            return country;
 
             throw new ArgumentException("Country with the given ID does not exist");
         }
