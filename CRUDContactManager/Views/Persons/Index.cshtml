@@ -3,32 +3,59 @@
     ViewBag.Title = "Persons";
 }
 
-<h1>Persons</h1>
+<form action="~/persons/index" method="get">
 
-<table class="table w-50" >
-    <thead>
-        <tr>
-            <th>Person Name</th>
-            <th>Email</th>
-            <th>Date of Birth</th>
-            <th>Country</th>
-            <th>Age</th>
-            <th>Gender</th>
-        </tr>
-    </thead>
+    <h1>Persons</h1>
 
-    <tbody>
-        @foreach (var person in Model)
-        {
-            <tr>
-                <td>@person.Name</td>
-                <td>@person.EmailAddress</td>
-                <td>@person.DateOfBirth?.ToString("dd/MM/yyyy")</td>
-                <td>@person.CountryName</td>
-                <td>@person.Age</td>
-                <td>@person.Gender</td>
-            </tr>
-        }
-    </tbody>
+    <div class="box flex">
+        <div class="flex-1">
+            <select class="form-input" name="searchBy">
+                @foreach (var field in ViewBag.SearchFields)
+                {
+                    <option value="@field.Key">@field.Value</option>
+                }
+            </select>
+        </div>
+        <div>
+            <input type="search" id="search" class="form-input" placeholder="Search" name="searchString" />
+        </div>
+
+        <div>
+            <button class="btn btn-primary">
+                Search
+            </button>
+            <a href="../Views/Persons/Index.cshtml">Clear all</a>
+        </div>
+    </div>
+
+    <div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Person Name</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Country</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var person in Model)
+                {
+                    <tr class="hover:bg-base-300">
+                        <td>@person.Name</td>
+                        <td>@person.EmailAddress</td>
+                        <td>@person.DateOfBirth?.ToString("dd/MM/yyyy")</td>
+                        <td>@person.CountryName</td>
+                        <td>@person.Age</td>
+                        <td>@person.Gender</td>
+                    </tr>
+                }
+            </tbody>
         
-</table>
+        </table>
+    </div>
+</form>

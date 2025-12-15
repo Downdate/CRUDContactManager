@@ -17,8 +17,17 @@ namespace CRUDContactManager.Controllers
 
         [Route("persons/index")]
         [Route("/")]
-        public IActionResult Index()
+        public IActionResult Index(string searchBy, string searchString)
         {
+            ViewBag.SearchFields = new Dictionary<string, string>()
+            {
+                {nameof(PersonResponse.Name) , "Person Name" },
+                {nameof(PersonResponse.EmailAddress) , "Email Address" },
+                {nameof(PersonResponse.DateOfBirth) , "Date of Birth" },
+                {nameof(PersonResponse.CountryName), "Country" },
+                {nameof(PersonResponse.Age), "Age" },
+                {nameof(PersonResponse.Gender),"Gender" }
+            };
             List<PersonResponse> persons = _personsService.GetPersonList();
 
             return View(persons);
