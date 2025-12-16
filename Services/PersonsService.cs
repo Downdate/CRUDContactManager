@@ -290,7 +290,7 @@ namespace Services
                     filteredPersons = allPersons.Where(temp => temp.Address != null && temp.Address.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
                     break;
 
-                case nameof(Person.CountryID):
+                case nameof(Person.Country.CountryName):
                     filteredPersons = allPersons.Where(temp => (!string.IsNullOrEmpty(temp.CountryName)) ?
                     temp.CountryName.Contains(searchString, StringComparison.OrdinalIgnoreCase) : true).ToList();
                     break;

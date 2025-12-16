@@ -28,7 +28,7 @@ namespace CRUDContactManager.Controllers
                 {nameof(PersonResponse.Age), "Age" },
                 {nameof(PersonResponse.Gender),"Gender" }
             };
-            List<PersonResponse> persons = _personsService.GetPersonList();
+            List<PersonResponse> persons = _personsService.GetFilteredPersonsList(searchBy, searchString);
 
             return View(persons);
         }

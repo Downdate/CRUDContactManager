@@ -20,7 +20,7 @@ namespace Entities
         public String? Gender { get; set; }
 
         public Guid? CountryID { get; set; }
-        //public Country? Country { get; set; }
+        public Country? Country { get; set; }
 
         public string? Address { get; set; }
 
