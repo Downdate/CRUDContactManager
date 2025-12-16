@@ -269,28 +269,28 @@ namespace Services
 
             switch (searchBy)
             {
-                case nameof(Person.Name):
+                case nameof(PersonResponse.Name):
                     filteredPersons = allPersons.Where(temp => temp.Name != null && temp.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
                     break;
 
-                case nameof(Person.EmailAddress):
+                case nameof(PersonResponse.EmailAddress):
                     filteredPersons = allPersons.Where(temp => temp.EmailAddress != null && temp.EmailAddress.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
                     break;
 
-                case nameof(Person.DateOfBirth):
+                case nameof(PersonResponse.DateOfBirth):
                     filteredPersons = allPersons.Where(temp => temp.DateOfBirth != null && temp.DateOfBirth.ToString()!.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
                     break;
 
-                case nameof(Person.Gender):
+                case nameof(PersonResponse.Gender):
                     filteredPersons = allPersons.Where(temp => (!string.IsNullOrEmpty(temp.Gender.ToString())) ?
                     temp.Gender.ToString().Contains(searchString, StringComparison.OrdinalIgnoreCase) : true).ToList();
                     break;
 
-                case nameof(Person.Address):
+                case nameof(PersonResponse.Address):
                     filteredPersons = allPersons.Where(temp => temp.Address != null && temp.Address.Contains(searchString, StringComparison.OrdinalIgnoreCase)).ToList();
                     break;
 
-                case nameof(Person.Country.CountryName):
+                case nameof(PersonResponse.CountryName):
                     filteredPersons = allPersons.Where(temp => (!string.IsNullOrEmpty(temp.CountryName)) ?
                     temp.CountryName.Contains(searchString, StringComparison.OrdinalIgnoreCase) : true).ToList();
                     break;

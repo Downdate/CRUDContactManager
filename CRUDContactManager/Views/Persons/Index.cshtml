@@ -12,34 +12,42 @@
             <select class="form-input" name="searchBy">
                 @foreach (var field in ViewBag.SearchFields)
                 {
-                    <option value="@field.Key">@field.Value</option>
+                    if (field.Key == ViewBag.CurrentSearchBy)
+                    {
+                        <option value="@field.Key" selected= "selected">@field.Value</option>   
+                    }
+                    <option value="@field.Key" >@field.Value</option>   
+
                 }
             </select>
         </div>
         <div>
-            <input type="search" id="search" class="form-input" placeholder="Search" name="searchString" />
+            <input type="search" id="search" class="form-input" placeholder="Search" name="searchString" value="@ViewBag.CurrentSearchString" />
         </div>
 
         <div>
             <button class="btn btn-primary">
                 Search
             </button>
-            <a href="../Views/Persons/Index.cshtml">Clear all</a>
+            <a href="~/persons/Index">Clear all</a>
         </div>
     </div>
 
     <div class="rounded-box border-base-content/5 bg-base-100 overflow-x-auto border">
 
-        <table class="table">
+        <table class="table" style="width: 80%">
             <thead>
                 <tr>
-                    <th>Person Name</th>
-                    <th>Email</th>
-                    <th>Date of Birth</th>
-                    <th>Country</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                </tr>
+                    @foreach (var Column in (ViewBag.Columns))
+                        {
+                            @await Html.PartialAsync("_GridColumnHeader", new ViewDataDictionary(ViewData)
+                                            {
+                                            { "ColumnName" , Column.Key },
+                                            {"DisplayName", Column.Value}
+                                            }
+                            );
+                        }
+                    </tr>
             </thead>
 
             <tbody>
