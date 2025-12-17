@@ -18,10 +18,10 @@ namespace Services
         private readonly ICountriesService _countriesService;
 
         //constructor
-        public PersonsService(bool initialize = true)
+        public PersonsService(ICountriesService countriesService, bool initialize = true)
         {
             _personsList = new List<Person>();
-            _countriesService = new CountriesService();
+            _countriesService = countriesService;
             if (initialize)
             {
                 List<CountryResponse> countries = _countriesService.GetAllCountries();
@@ -198,6 +198,14 @@ namespace Services
             //convert to person
 
             Person person = personAddRequest.ToPerson();
+
+            //the ToPerson() method can't add Country
+            CountryResponse country = _countriesService.GetAllCountries().First(temp => temp.CountryID == person.CountryID);
+            person.Country = new Country()
+            {
+                CountryID = country.CountryID,
+                CountryName = country.CountryName,
+            };
 
             //Generate person.ID
 

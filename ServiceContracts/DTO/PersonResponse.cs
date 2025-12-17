@@ -98,7 +98,7 @@ namespace ServiceContracts.DTO
                 Gender = Enum.Parse<GenderOptions>(person.Gender),
                 Address = person.Address,
                 CountryID = person.CountryID,
-                //CountryName = person.Country?.CountryName,
+                CountryName = person.Country?.CountryName,
                 ReceiveNewsLetters = person.ReceiveNewsLetters,
                 Age = (person.DateOfBirth != null) ? Math.Round((DateTime.Now - person.DateOfBirth.Value).TotalDays / 365.25) : null,
             };

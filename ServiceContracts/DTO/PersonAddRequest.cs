@@ -43,6 +43,7 @@ namespace ServiceContracts.DTO
                 Gender = this.Gender.ToString(),
                 Address = this.Address,
                 CountryID = this.CountryID,
+                Country = null,
                 ReceiveNewsLetters = this.ReceiveNewsLetters,
             };
 
