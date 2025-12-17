@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CRUDContactManager.ViewModels.Persons;
+using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.Enums;
+using Services;
+using System.Threading.Tasks;
 
 namespace CRUDContactManager.Controllers
 {
@@ -10,10 +13,13 @@ namespace CRUDContactManager.Controllers
         //private fields
         private readonly IPersonsService _personsService;
 
+        private readonly ICountriesService _countriesService;
+
         //constructor
-        public PersonsController(IPersonsService personsService)
+        public PersonsController(IPersonsService personsService, ICountriesService countriesService)
         {
             _personsService = personsService;
+            _countriesService = countriesService;
         }
 
         [Route("persons/index")]
@@ -50,6 +56,32 @@ namespace CRUDContactManager.Controllers
             ViewBag.CurrentSortOrder = sortOrder;
 
             return View(persons);
+        }
+
+        //Executed when HTTP GET /persons/create
+        [Route("persons/create")]
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            CreatePersonViewModel model = new CreatePersonViewModel();
+            model.Countries = _countriesService.GetAllCountries();
+
+            return View(model);
+        }
+
+        //Executed when HTTP POST /persons/create
+        [Route("persons/create")]
+        [HttpPost]
+        public IActionResult Create(CreatePersonViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Countries = _countriesService.GetAllCountries();
+                return View(model);
+            }
+
+            _personsService.AddPerson(model.Person);
+            return RedirectToAction("Index");
         }
     }
 }
