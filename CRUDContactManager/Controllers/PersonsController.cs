@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CRUDContactManager.Controllers
 {
+    [Route("[Controller]")]
     public class PersonsController : Controller
     {
         //private fields
@@ -22,7 +23,7 @@ namespace CRUDContactManager.Controllers
             _countriesService = countriesService;
         }
 
-        [Route("persons/index")]
+        [Route("[Action]")]
         [Route("/")]
         public IActionResult Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.Name), SortOrderOptions sortOrder = SortOrderOptions.ASCENDING)
         {
@@ -59,7 +60,7 @@ namespace CRUDContactManager.Controllers
         }
 
         //Executed when HTTP GET /persons/create
-        [Route("persons/create")]
+        [Route("create")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -70,7 +71,7 @@ namespace CRUDContactManager.Controllers
         }
 
         //Executed when HTTP POST /persons/create
-        [Route("persons/create")]
+        [Route("[Action]")]
         [HttpPost]
         public IActionResult Create(CreatePersonViewModel model)
         {
