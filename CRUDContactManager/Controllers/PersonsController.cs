@@ -92,13 +92,18 @@ namespace CRUDContactManager.Controllers
         {
             UpdatePersonViewModel model = new UpdatePersonViewModel();
             model.Countries = _countriesService.GetAllCountries();
-            model.Person = _personsService.GetPersonByPersonID(personID).ToPersonUpdateRequest();
+            PersonResponse personResponse = _personsService.GetPersonByPersonID(personID);
+            if (personResponse == null)
+            {
+                return RedirectToAction("Index");
+            }
+            model.Person = personResponse.ToPersonUpdateRequest();
 
             return View(model);
         }
 
         //Executed when HTTP POST /persons/Update
-        [Route("[Action]/{personID}")]
+        [Route("[Action]")]
         [HttpPost]
         public IActionResult Update(UpdatePersonViewModel model)
         {
