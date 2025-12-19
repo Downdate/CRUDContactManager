@@ -1,13 +1,12 @@
 ﻿@using CRUDContactManager.ViewModels.Persons
-@model CreatePersonViewModel
+@model UpdatePersonViewModel
 @{
-    ViewBag.Title = "Create Person";
+    ViewBag.Title = "Update Person";
 }
 
 <div class="center-box">
-    <form asp-action="create" method="post">
-        <a asp-controller="Persons" asp-action="index">Go back to Persons List</a>
-        <h1>Create Person</h1>
+    <form asp-action="Update" method="post">
+        <h1>Update Person</h1>
         @*PersonName*@
         <div class="form-field flex">
             <div class="w-25">
@@ -49,7 +48,7 @@
                     }
                     @foreach(string gender in genders)
                     {
-                        <input asp-for="Person.Gender" type="radio" value="@gender" class="ml" />
+                    <input asp-for="Person.Gender" type="radio" value="@gender" class="ml" />
                         <label for="@gender">@gender</label>
                     }
                 <span asp-validation-for="Person.Gender" class="text-red"></span>
@@ -87,6 +86,8 @@
                 <input asp-for="Person.ReceiveNewsLetters" type="checkbox"/>
             </div>
         </div>
+        @*ID*@
+        <input type="hidden" asp-for="Person.ID" />
         @*Submit*@
         <div class="form-field flex">
             <div class="w-25">
@@ -94,7 +95,7 @@
             </div>
             <div class="flex-1">
                 
-                <button type="submit" class="btn btn-primary mb-4">Create Person</button>
+                <button type="submit" class="btn btn-primary mb-4">Update Person</button>
 
                 <div asp-validation-summary="All" class="text-red" ></div>
 

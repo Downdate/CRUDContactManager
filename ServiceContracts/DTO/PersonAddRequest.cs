@@ -40,7 +40,7 @@ namespace ServiceContracts.DTO
         /// <returns>A <see cref="Person"/> object containing the data from the current instance.</returns>
         public Person ToPerson()
         {
-            Entities.Person person = new Entities.Person()
+            Person person = new Person()
             {
                 Name = this.Name,
                 EmailAddress = this.EmailAddress,

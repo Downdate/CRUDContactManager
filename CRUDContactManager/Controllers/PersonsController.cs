@@ -60,7 +60,7 @@ namespace CRUDContactManager.Controllers
         }
 
         //Executed when HTTP GET /persons/create
-        [Route("create")]
+        [Route("[action]")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -82,6 +82,33 @@ namespace CRUDContactManager.Controllers
             }
 
             _personsService.AddPerson(model.Person);
+            return RedirectToAction("Index");
+        }
+
+        //Executed when HTTP GET /persons/Update
+        [Route("[action]/{personID}")]
+        [HttpGet]
+        public async Task<IActionResult> Update(Guid personID)
+        {
+            UpdatePersonViewModel model = new UpdatePersonViewModel();
+            model.Countries = _countriesService.GetAllCountries();
+            model.Person = _personsService.GetPersonByPersonID(personID).ToPersonUpdateRequest();
+
+            return View(model);
+        }
+
+        //Executed when HTTP POST /persons/Update
+        [Route("[Action]/{personID}")]
+        [HttpPost]
+        public IActionResult Update(UpdatePersonViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Countries = _countriesService.GetAllCountries();
+                return View(model);
+            }
+
+            _personsService.UpdatePerson(model.Person);
             return RedirectToAction("Index");
         }
     }
