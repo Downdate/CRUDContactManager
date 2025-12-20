@@ -61,7 +61,10 @@
                         <td>@person.Age</td>
                         <td>@person.Gender</td>
                         <td>
-                            <a asp-controller="Persons" asp-action="Update" asp-route-personID="@person.ID">Update</a>
+                            <a asp-controller="Persons" asp-action="Update" asp-route-personID="@person.ID">Update <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        </td>
+                        <td>
+                            <a asp-controller="Persons" asp-action="Delete" asp-route-personID="@person.ID">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 }

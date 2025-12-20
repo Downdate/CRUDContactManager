@@ -92,7 +92,7 @@ namespace CRUDContactManager.Controllers
         {
             UpdatePersonViewModel model = new UpdatePersonViewModel();
             model.Countries = _countriesService.GetAllCountries();
-            PersonResponse personResponse = _personsService.GetPersonByPersonID(personID);
+            PersonResponse? personResponse = _personsService.GetPersonByPersonID(personID);
             if (personResponse == null)
             {
                 return RedirectToAction("Index");
@@ -114,6 +114,28 @@ namespace CRUDContactManager.Controllers
             }
 
             _personsService.UpdatePerson(model.Person);
+            return RedirectToAction("Index");
+        }
+
+        //Executed when HTTP GET /persons/Delete
+        [Route("[action]/{personID}")]
+        [HttpGet]
+        public IActionResult Delete(Guid personID)
+        {
+            PersonResponse? personResponse = _personsService.GetPersonByPersonID(personID);
+            if (personResponse == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(personResponse);
+        }
+
+        //Executed when HTTP POST /persons/Delete
+        [Route("[action]/{personID}")]
+        [HttpPost]
+        public IActionResult Delete(PersonResponse model)
+        {
+            _personsService.DeletePerson(model.ID);
             return RedirectToAction("Index");
         }
     }
