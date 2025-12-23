@@ -1,68 +1,63 @@
-﻿using ServiceContracts.DTO;
+﻿using System;
+using ServiceContracts.DTO;
 using ServiceContracts.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ServiceContracts
 {
+    /// <summary>
+    /// Represents business logic for manipulating Perosn entity
+    /// </summary>
     public interface IPersonsService
     {
         /// <summary>
-        /// Adds a new person to the system using the specified request data.
+        /// Addds a new person into the list of persons
         /// </summary>
-        /// <param name="personAddRequest">The request containing the details of the person to add. Cannot be null.</param>
-        /// <returns>A response object containing information about the added person, including any generated identifiers or
-        /// status information.</returns>
-        public PersonResponse AddPerson(PersonAddRequest? personAddRequest);
+        /// <param name="personAddRequest">Person to add</param>
+        /// <returns>Returns the same person details, along with newly generated PersonID</returns>
+        PersonResponse AddPerson(PersonAddRequest? personAddRequest);
 
         /// <summary>
-        /// Retrieves a list of people represented as response objects.
+        /// Returns all persons
         /// </summary>
-        /// <returns>A list of <see cref="PersonResponse"/> objects containing information about each person. The list is empty
-        /// if no people are found.</returns>
-        public List<PersonResponse> GetPersonList();
+        /// <returns>Returns a list of objects of PersonResponse type</returns>
+        List<PersonResponse> GetAllPersons();
 
         /// <summary>
-        /// Retrieves the person record associated with the specified person identifier.
+        /// Returns the person object based on the given person id
         /// </summary>
-        /// <param name="personID">The unique identifier of the person to retrieve. Specify <see langword="null"/> to indicate that no
-        /// identifier is provided.</param>
-        /// <returns>A <see cref="PersonResponse"/> containing the details of the person if found; otherwise, <see
-        /// langword="null"/>.</returns>
+        /// <param name="personID">Person id to search</param>
+        /// <returns>Returns matching person object</returns>
         PersonResponse? GetPersonByPersonID(Guid? personID);
 
         /// <summary>
-        /// Retrieves a list of persons filtered according to the specified search criteria.
+        /// Returns all person objects that matches with the given search field and search string
         /// </summary>
-        /// <param name="searchBy">The field name to filter by. Common values include property names such as "FirstName", "LastName", or
-        /// "Email". This value is case-insensitive.</param>
-        /// <param name="searchString">The value to search for within the specified field. If null or empty, no filtering is applied and all
-        /// persons are returned.</param>
-        /// <returns>A list of <see cref="PersonResponse"/> objects that match the specified filter. Returns an empty list if no
-        /// persons match the criteria.</returns>
-        List<PersonResponse> GetFilteredPersonsList(string searchBy, string? searchString);
+        /// <param name="searchBy">Search field to search</param>
+        /// <param name="searchString">Search string to search</param>
+        /// <returns>Returns all matching persons based on the given search field and search string</returns>
+        List<PersonResponse> GetFilteredPersons(string searchBy, string? searchString);
 
         /// <summary>
-        /// Returns a new list of persons sorted according to the specified property and sort order.
+        /// Returns sorted list of persons
         /// </summary>
-        /// <remarks>The original list is not modified. If an invalid property name is provided for
-        /// sortBy, the method may throw an exception or ignore the sort, depending on implementation.</remarks>
-        /// <param name="allPersons">The list of persons to sort. Cannot be null.</param>
-        /// <param name="sortBy">The name of the property to sort by. Common values include "FirstName", "LastName", or "DateOfBirth". Cannot
-        /// be null or empty.</param>
-        /// <param name="sortOrder">The sort order to apply to the results. Specify ascending or descending.</param>
-        /// <returns>A new list of persons sorted by the specified property and order. If the input list is empty, returns an
-        /// empty list.</returns>
+        /// <param name="allPersons">Represents list of persons to sort</param>
+        /// <param name="sortBy">Name of the property (key), based on which the persons should be sorted</param>
+        /// <param name="sortOrder">ASC or DESC</param>
+        /// <returns>Returns sorted persons as PersonResponse list</returns>
         List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder);
 
         /// <summary>
-        /// Updates the details of an existing person using the specified update request.
+        /// Updates the specified person details based on the given person ID
         /// </summary>
-        /// <param name="personUpdateRequest">An object containing the updated information for the person. Cannot be null.</param>
-        /// <returns>A PersonResponse object containing the updated details of the person.</returns>
+        /// <param name="personUpdateRequest">Person details to update, including person id</param>
+        /// <returns>Returns the person response object after updation</returns>
         PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest);
 
-        PersonResponse DeletePerson(Guid? PersonID);
+        /// <summary>
+        /// Deletes a person based on the given person id
+        /// </summary>
+        /// <param name="PersonID">PersonID to delete</param>
+        /// <returns>Returns true, if the deletion is successful; otherwise false</returns>
+        bool DeletePerson(Guid? personID);
     }
 }

@@ -3,7 +3,7 @@
 namespace Entities
 {
     /// <summary>
-    /// Domain model for country
+    /// Domain Model for Country
     /// </summary>
     public class Country
     {

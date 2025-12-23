@@ -6,6 +6,6 @@ namespace ServiceContracts.Enums
 {
     public enum SortOrderOptions
     {
-        ASCENDING, DESCENDING,
+        ASC, DESC,
     }
 }

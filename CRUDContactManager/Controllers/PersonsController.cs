@@ -25,19 +25,19 @@ namespace CRUDContactManager.Controllers
 
         [Route("[Action]")]
         [Route("/")]
-        public IActionResult Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.Name), SortOrderOptions sortOrder = SortOrderOptions.ASCENDING)
+        public IActionResult Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
             //Search
             ViewBag.SearchFields = new Dictionary<string, string>()
             {
-                {nameof(PersonResponse.Name) , "Person Name" },
-                {nameof(PersonResponse.EmailAddress) , "Email Address" },
+                {nameof(PersonResponse.PersonName) , "Person Name" },
+                {nameof(PersonResponse.Email) , "Email Address" },
                 {nameof(PersonResponse.DateOfBirth) , "Date of Birth" },
-                {nameof(PersonResponse.CountryName), "Country" },
+                {nameof(PersonResponse.Country), "Country" },
                 {nameof(PersonResponse.Age), "Age" },
                 {nameof(PersonResponse.Gender),"Gender" }
             };
-            List<PersonResponse> persons = _personsService.GetFilteredPersonsList(searchBy, searchString);
+            List<PersonResponse> persons = _personsService.GetFilteredPersons(searchBy, searchString);
 
             ViewBag.CurrentSearchBy = searchBy;
             ViewBag.CurrentSearchString = searchString;
@@ -45,10 +45,10 @@ namespace CRUDContactManager.Controllers
             //Sorting
             ViewBag.Columns = new Dictionary<string, string>()
             {
-                {nameof(PersonResponse.Name) , "Person Name" },
-                {nameof(PersonResponse.EmailAddress) , "Email Address" },
+                {nameof(PersonResponse.PersonName) , "Person Name" },
+                {nameof(PersonResponse.Email) , "Email Address" },
                 {nameof(PersonResponse.DateOfBirth) , "Date of Birth" },
-                {nameof(PersonResponse.CountryName), "Country" },
+                {nameof(PersonResponse.Country), "Country" },
                 {nameof(PersonResponse.Age), "Age" },
                 {nameof(PersonResponse.Gender), "Gender" },
             };
@@ -135,7 +135,7 @@ namespace CRUDContactManager.Controllers
         [HttpPost]
         public IActionResult Delete(PersonResponse model)
         {
-            _personsService.DeletePerson(model.ID);
+            _personsService.DeletePerson(model.PersonID);
             return RedirectToAction("Index");
         }
     }

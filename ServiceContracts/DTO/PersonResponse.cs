@@ -1,57 +1,38 @@
-﻿using ServiceContracts.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using Entities;
-using System.Runtime.CompilerServices;
+using ServiceContracts.Enums;
 
 namespace ServiceContracts.DTO
 {
     /// <summary>
-    /// Represents the response containing information about a person. DTO for person response.
+    /// Represents DTO class that is used as return type of most methods of Persons Service
     /// </summary>
     public class PersonResponse
     {
-        public Guid ID { get; set; }
-        public string? Name { get; set; }
-        public string? EmailAddress { get; set; }
+        public Guid PersonID { get; set; }
+        public string? PersonName { get; set; }
+        public string? Email { get; set; }
         public DateTime? DateOfBirth { get; set; }
-
-        public GenderOptions? Gender { get; set; }
-
-        public string? Address { get; set; }
-
+        public string? Gender { get; set; }
         public Guid? CountryID { get; set; }
-
-        public string? CountryName { get; set; }
-
+        public string? Country { get; set; }
+        public string? Address { get; set; }
         public bool ReceiveNewsLetters { get; set; }
-
         public double? Age { get; set; }
 
         /// <summary>
-        /// Determines whether the specified object is equal to the current PersonResponse instance.
+        /// Compares the current object data with the parameter object
         /// </summary>
-        /// <param name="obj">The object to compare with the current PersonResponse instance.</param>
-        /// <returns>true if the specified object is a PersonResponse and has the same properties as the current instance; otherwise,
-        /// false.</returns>
+        /// <param name="obj">The PersonResponse Object to compare</param>
+        /// <returns>True or false, indicating whether all person details are matched with the specified parameter object</returns>
         public override bool Equals(object? obj)
         {
-            if (ReferenceEquals(obj, null)) return false;
+            if (obj == null) return false;
+
             if (obj.GetType() != typeof(PersonResponse)) return false;
 
             PersonResponse person = (PersonResponse)obj;
-
-            return this.ID == person.ID
-                && this.Name == person.Name
-                && this.EmailAddress == person.EmailAddress
-                && this.DateOfBirth == person.DateOfBirth
-                && this.Gender == person.Gender
-                && this.Address == person.Address
-                && this.CountryID == person.CountryID
-                && this.CountryName == person.CountryName
-                && this.ReceiveNewsLetters == person.ReceiveNewsLetters
-                && this.Age == person.Age;
+            return PersonID == person.PersonID && PersonName == person.PersonName && Email == person.Email && DateOfBirth == person.DateOfBirth && Gender == person.Gender && CountryID == person.CountryID && Address == person.Address && ReceiveNewsLetters == person.ReceiveNewsLetters;
         }
 
         public override int GetHashCode()
@@ -61,46 +42,36 @@ namespace ServiceContracts.DTO
 
         public override string ToString()
         {
-            return $"ID={ID}, Name={Name}, EmailAddress={EmailAddress}, DateOfBirth={DateOfBirth}";
+            return $"Person ID: {PersonID}, Person Name: {PersonName}, Email: {Email}, Date of Birth: {DateOfBirth?.ToString("dd MMM yyyy")}, Gender: {Gender}, Country ID: {CountryID}, Country: {Country}, Address: {Address}, Receive News Letters: {ReceiveNewsLetters}";
         }
 
         public PersonUpdateRequest ToPersonUpdateRequest()
         {
-            return new PersonUpdateRequest()
-            {
-                ID = this.ID,
-                Name = this.Name,
-                EmailAddress = this.EmailAddress,
-                DateOfBirth = this.DateOfBirth,
-                Gender = (GenderOptions)Enum.Parse(typeof(GenderOptions), Gender.ToString(), true),
-                Address = this.Address,
-                CountryID = this.CountryID,
-                ReceiveNewsLetters = this.ReceiveNewsLetters
-            };
+            return new PersonUpdateRequest() { PersonID = PersonID, PersonName = PersonName, Email = Email, DateOfBirth = DateOfBirth, Gender = (GenderOptions)Enum.Parse(typeof(GenderOptions), Gender, true), Address = Address, CountryID = CountryID, ReceiveNewsLetters = ReceiveNewsLetters };
         }
     }
 
-    public static class PersonExtentions
+    public static class PersonExtensions
     {
         /// <summary>
-        /// Converts a Person object to a PersonResponse object for use in API responses or data transfer scenarios.
+        /// An extension method to convert an object of Person class into PersonResponse class
         /// </summary>
-        /// <param name="person">The Person instance to convert. Cannot be null.</param>
-        /// <returns>A PersonResponse object containing the mapped data from the specified Person instance.</returns>
+        /// <param name="person">The Person object to convert</param>
+        /// /// <returns>Returns the converted PersonResponse object</returns>
         public static PersonResponse ToPersonResponse(this Person person)
         {
+            //person => convert => PersonResponse
             return new PersonResponse()
             {
-                ID = person.ID,
-                Name = person.Name,
-                EmailAddress = person.EmailAddress,
+                PersonID = person.PersonID,
+                PersonName = person.PersonName,
+                Email = person.Email,
                 DateOfBirth = person.DateOfBirth,
-                Gender = Enum.Parse<GenderOptions>(person.Gender),
+                ReceiveNewsLetters = person.ReceiveNewsLetters,
                 Address = person.Address,
                 CountryID = person.CountryID,
-                CountryName = person.Country?.CountryName,
-                ReceiveNewsLetters = person.ReceiveNewsLetters,
-                Age = (person.DateOfBirth != null) ? Math.Round((DateTime.Now - person.DateOfBirth.Value).TotalDays / 365.25) : null,
+                Gender = person.Gender,
+                Age = (person.DateOfBirth != null) ? Math.Round((DateTime.Now - person.DateOfBirth.Value).TotalDays / 365.25) : null
             };
         }
     }

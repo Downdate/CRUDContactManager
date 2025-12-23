@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using ServiceContracts.Enums;
 using Entities;
 using System.ComponentModel.DataAnnotations;
@@ -8,51 +6,37 @@ using System.ComponentModel.DataAnnotations;
 namespace ServiceContracts.DTO
 {
     /// <summary>
-    /// Represents a request to add a new person to the system. DTO for adding person.
+    /// Acts as a DTO for inserting a new person
     /// </summary>
     public class PersonAddRequest
     {
-        [Required(ErrorMessage = "PersonName can't be blank")]
-        public string? Name { get; set; }
+        [Required(ErrorMessage = "Person Name can't be blank")]
+        public string? PersonName { get; set; }
 
-        [Required(ErrorMessage = "Person Email can't be blank")]
-        [EmailAddress(ErrorMessage = "Email should be valid")]
+        [Required(ErrorMessage = "Email can't be blank")]
+        [EmailAddress(ErrorMessage = "Email value should be a valid email")]
         [DataType(DataType.EmailAddress)]
-        public string? EmailAddress { get; set; }
+        public string? Email { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Date of Birth can't be blank")]
         public DateTime? DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Choose a Gender")]
+        [Required(ErrorMessage = "Please select gender of the person")]
         public GenderOptions? Gender { get; set; }
 
-        public string? Address { get; set; }
-
-        [Required(ErrorMessage = "Please select a Country!")]
+        [Required(ErrorMessage = "Please select a country")]
         public Guid? CountryID { get; set; }
 
+        public string? Address { get; set; }
         public bool ReceiveNewsLetters { get; set; }
 
         /// <summary>
-        /// Converts the current instance to a new <see cref="Person"/> object with equivalent property values.
+        /// Converts the current object of PersonAddRequest into a new object of Person type
         /// </summary>
-        /// <returns>A <see cref="Person"/> object containing the data from the current instance.</returns>
+        /// <returns></returns>
         public Person ToPerson()
         {
-            Person person = new Person()
-            {
-                Name = this.Name,
-                EmailAddress = this.EmailAddress,
-                DateOfBirth = this.DateOfBirth,
-                Gender = this.Gender.ToString(),
-                Address = this.Address,
-                CountryID = this.CountryID,
-                Country = null,
-                ReceiveNewsLetters = this.ReceiveNewsLetters,
-            };
-
-            return person;
+            return new Person() { PersonName = PersonName, Email = Email, DateOfBirth = DateOfBirth, Gender = Gender.ToString(), Address = Address, CountryID = CountryID, ReceiveNewsLetters = ReceiveNewsLetters };
         }
     }
 }

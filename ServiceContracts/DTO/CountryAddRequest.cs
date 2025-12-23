@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Entities;
 
 namespace ServiceContracts.DTO
@@ -12,7 +11,7 @@ namespace ServiceContracts.DTO
     {
         public string? CountryName { get; set; }
 
-        public Country toCountry()
+        public Country ToCountry()
         {
             return new Country() { CountryName = CountryName };
         }
