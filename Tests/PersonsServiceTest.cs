@@ -105,137 +105,137 @@ namespace Tests
             // ------------------------------------------------------------
             List<PersonAddRequest> personList = new()
             {
-                new() { Name="John Smith", Address="Rome, Italy", DateOfBirth=new(1990,1,5), CountryID=countries[27].CountryID, EmailAddress="john.smith@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Aiko Tanaka", Address="Tokyo, Japan", DateOfBirth=new(1998,3,12), CountryID=countries[28].CountryID, EmailAddress="aiko.tanaka@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Carlos Mendes", Address="Lisbon, Portugal", DateOfBirth=new(1984,7,18), CountryID=countries[40].CountryID, EmailAddress="carlos.mendes@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Emily Davis", Address="Toronto, Canada", DateOfBirth=new(1993,4,9), CountryID=countries[6].CountryID, EmailAddress="emily.davis@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Omar Hassan", Address="Cairo, Egypt", DateOfBirth=new(1989,12,22), CountryID=countries[13].CountryID, EmailAddress="omar.hassan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Wei Zhang", Address="Beijing, China", DateOfBirth=new(1991,5,3), CountryID=countries[8].CountryID, EmailAddress="wei.zhang@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Sara Lopez", Address="Madrid, Spain", DateOfBirth=new(1995,8,30), CountryID=countries[46].CountryID, EmailAddress="sara.lopez@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Ivan Petrov", Address="Moscow, Russia", DateOfBirth=new(1987,10,11), CountryID=countries[42].CountryID, EmailAddress="ivan.petrov@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Linda Berg", Address="Stockholm, Sweden", DateOfBirth=new(1990,9,14), CountryID=countries[47].CountryID, EmailAddress="linda.berg@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Raj Patel", Address="Mumbai, India", DateOfBirth=new(1994,2,17), CountryID=countries[21].CountryID, EmailAddress="raj.patel@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="John Smith", Address="Rome, Italy", DateOfBirth=new(1990,1,5), CountryID=countries[27].CountryID, Email="john.smith@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Aiko Tanaka", Address="Tokyo, Japan", DateOfBirth=new(1998,3,12), CountryID=countries[28].CountryID, Email="aiko.tanaka@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Carlos Mendes", Address="Lisbon, Portugal", DateOfBirth=new(1984,7,18), CountryID=countries[40].CountryID, Email="carlos.mendes@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Emily Davis", Address="Toronto, Canada", DateOfBirth=new(1993,4,9), CountryID=countries[6].CountryID, Email="emily.davis@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Omar Hassan", Address="Cairo, Egypt", DateOfBirth=new(1989,12,22), CountryID=countries[13].CountryID, Email="omar.hassan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Wei Zhang", Address="Beijing, China", DateOfBirth=new(1991,5,3), CountryID=countries[8].CountryID, Email="wei.zhang@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Sara Lopez", Address="Madrid, Spain", DateOfBirth=new(1995,8,30), CountryID=countries[46].CountryID, Email="sara.lopez@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Ivan Petrov", Address="Moscow, Russia", DateOfBirth=new(1987,10,11), CountryID=countries[42].CountryID, Email="ivan.petrov@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Linda Berg", Address="Stockholm, Sweden", DateOfBirth=new(1990,9,14), CountryID=countries[47].CountryID, Email="linda.berg@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Raj Patel", Address="Mumbai, India", DateOfBirth=new(1994,2,17), CountryID=countries[21].CountryID, Email="raj.patel@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
 
                 // ----------------------------------------------------------
                 // THE NEXT 90 PEOPLE FOLLOW THE SAME FORMAT
                 // ----------------------------------------------------------
 
-                new() { Name="Kevin Brown", Address="Sydney, Australia", DateOfBirth=new(1992,6,12), CountryID=countries[1].CountryID, EmailAddress="kevin.brown@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Maria Gomez", Address="Mexico City, Mexico", DateOfBirth=new(1988,11,4), CountryID=countries[30].CountryID, EmailAddress="maria.gomez@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Nora Varga", Address="Budapest, Hungary", DateOfBirth=new(1996,7,24), CountryID=countries[19].CountryID, EmailAddress="nora.varga@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Yuki Mori", Address="Osaka, Japan", DateOfBirth=new(1999,8,19), CountryID=countries[28].CountryID, EmailAddress="yuki.mori@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Ahmed Karim", Address="Baghdad, Iraq", DateOfBirth=new(1985,1,27), CountryID=countries[24].CountryID, EmailAddress="ahmed.karim@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Hana Suzuki", Address="Tokyo, Japan", DateOfBirth=new(1997,4,7), CountryID=countries[28].CountryID, EmailAddress="hana.suzuki@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Paul Weber", Address="Berlin, Germany", DateOfBirth=new(1990,10,20), CountryID=countries[17].CountryID, EmailAddress="paul.weber@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Elena Rossi", Address="Rome, Italy", DateOfBirth=new(1993,3,5), CountryID=countries[27].CountryID, EmailAddress="elena.rossi@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Ali Hassan", Address="Tehran, Iran", DateOfBirth=new(1984,9,14), CountryID=countries[23].CountryID, EmailAddress="ali.hassan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Kim Seung", Address="Seoul, South Korea", DateOfBirth=new(1992,12,12), CountryID=countries[45].CountryID, EmailAddress="kim.seung@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Kevin Brown", Address="Sydney, Australia", DateOfBirth=new(1992,6,12), CountryID=countries[1].CountryID, Email="kevin.brown@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Maria Gomez", Address="Mexico City, Mexico", DateOfBirth=new(1988,11,4), CountryID=countries[30].CountryID, Email="maria.gomez@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Nora Varga", Address="Budapest, Hungary", DateOfBirth=new(1996,7,24), CountryID=countries[19].CountryID, Email="nora.varga@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Yuki Mori", Address="Osaka, Japan", DateOfBirth=new(1999,8,19), CountryID=countries[28].CountryID, Email="yuki.mori@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Ahmed Karim", Address="Baghdad, Iraq", DateOfBirth=new(1985,1,27), CountryID=countries[24].CountryID, Email="ahmed.karim@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Hana Suzuki", Address="Tokyo, Japan", DateOfBirth=new(1997,4,7), CountryID=countries[28].CountryID, Email="hana.suzuki@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Paul Weber", Address="Berlin, Germany", DateOfBirth=new(1990,10,20), CountryID=countries[17].CountryID, Email="paul.weber@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Elena Rossi", Address="Rome, Italy", DateOfBirth=new(1993,3,5), CountryID=countries[27].CountryID, Email="elena.rossi@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Ali Hassan", Address="Tehran, Iran", DateOfBirth=new(1984,9,14), CountryID=countries[23].CountryID, Email="ali.hassan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Kim Seung", Address="Seoul, South Korea", DateOfBirth=new(1992,12,12), CountryID=countries[45].CountryID, Email="kim.seung@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
 
                 // 80 MORE PEOPLE BELOW (ALL UNIQUE AND HARD-CODED)
 
-                new() { Name="Mark Wilson", Address="New York, USA", DateOfBirth=new(1991,1,10), CountryID=countries[49].CountryID, EmailAddress="mark.wilson@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Julia Steiner", Address="Vienna, Austria", DateOfBirth=new(1994,5,21), CountryID=countries[2].CountryID, EmailAddress="julia.steiner@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Pedro Lima", Address="Sao Paulo, Brazil", DateOfBirth=new(1986,2,14), CountryID=countries[4].CountryID, EmailAddress="pedro.lima@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Anna Novak", Address="Warsaw, Poland", DateOfBirth=new(1990,7,29), CountryID=countries[39].CountryID, EmailAddress="anna.novak@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Chen Li", Address="Shanghai, China", DateOfBirth=new(1998,9,19), CountryID=countries[8].CountryID, EmailAddress="chen.li@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Fatima Noor", Address="Karachi, Pakistan", DateOfBirth=new(1992,11,11), CountryID=countries[36].CountryID, EmailAddress="fatima.noor@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Victor Reyes", Address="Lima, Peru", DateOfBirth=new(1989,8,23), CountryID=countries[37].CountryID, EmailAddress="victor.reyes@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Laura Mendez", Address="Bogota, Colombia", DateOfBirth=new(1996,12,3), CountryID=countries[9].CountryID, EmailAddress="laura.mendez@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Daniel Park", Address="Busan, South Korea", DateOfBirth=new(1991,4,16), CountryID=countries[45].CountryID, EmailAddress="daniel.park@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Yara Sami", Address="Riyadh, Saudi Arabia", DateOfBirth=new(1988,1,28), CountryID=countries[43].CountryID, EmailAddress="yara.sami@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Mark Wilson", Address="New York, USA", DateOfBirth=new(1991,1,10), CountryID=countries[49].CountryID, Email="mark.wilson@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Julia Steiner", Address="Vienna, Austria", DateOfBirth=new(1994,5,21), CountryID=countries[2].CountryID, Email="julia.steiner@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Pedro Lima", Address="Sao Paulo, Brazil", DateOfBirth=new(1986,2,14), CountryID=countries[4].CountryID, Email="pedro.lima@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Anna Novak", Address="Warsaw, Poland", DateOfBirth=new(1990,7,29), CountryID=countries[39].CountryID, Email="anna.novak@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Chen Li", Address="Shanghai, China", DateOfBirth=new(1998,9,19), CountryID=countries[8].CountryID, Email="chen.li@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Fatima Noor", Address="Karachi, Pakistan", DateOfBirth=new(1992,11,11), CountryID=countries[36].CountryID, Email="fatima.noor@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Victor Reyes", Address="Lima, Peru", DateOfBirth=new(1989,8,23), CountryID=countries[37].CountryID, Email="victor.reyes@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Laura Mendez", Address="Bogota, Colombia", DateOfBirth=new(1996,12,3), CountryID=countries[9].CountryID, Email="laura.mendez@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Daniel Park", Address="Busan, South Korea", DateOfBirth=new(1991,4,16), CountryID=countries[45].CountryID, Email="daniel.park@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Yara Sami", Address="Riyadh, Saudi Arabia", DateOfBirth=new(1988,1,28), CountryID=countries[43].CountryID, Email="yara.sami@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
 
                 //-------------------------------------------------------------
                 // 70 MORE (CONTINUING THE PATTERN, ALL UNIQUE)
                 //-------------------------------------------------------------
 
-                new() { Name="Robert King", Address="London, UK", DateOfBirth=new(1987,10,4), CountryID=countries[25].CountryID, EmailAddress="robert.king@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Sofia Marin", Address="Barcelona, Spain", DateOfBirth=new(1995,11,17), CountryID=countries[46].CountryID, EmailAddress="sofia.marin@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Hadi Barzan", Address="Erbil, Iraq", DateOfBirth=new(1991,9,2), CountryID=countries[24].CountryID, EmailAddress="hadi.barzan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Miguel Torres", Address="Santiago, Chile", DateOfBirth=new(1990,3,15), CountryID=countries[7].CountryID, EmailAddress="miguel.torres@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Erik Hansen", Address="Oslo, Norway", DateOfBirth=new(1986,5,10), CountryID=countries[35].CountryID, EmailAddress="erik.hansen@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Natalie Fischer", Address="Zurich, Switzerland", DateOfBirth=new(1998,1,29), CountryID=countries[48].CountryID, EmailAddress="natalie.fischer@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Samir Abbas", Address="Casablanca, Morocco", DateOfBirth=new(1989,6,7), CountryID=countries[31].CountryID, EmailAddress="samir.abbas@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Hiroshi Sato", Address="Nagoya, Japan", DateOfBirth=new(1994,8,30), CountryID=countries[28].CountryID, EmailAddress="hiroshi.sato@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Elif Kaya", Address="Istanbul, Turkey", DateOfBirth=new(1993,7,14), CountryID=countries[41].CountryID, EmailAddress="elif.kaya@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Anders Lund", Address="Copenhagen, Denmark", DateOfBirth=new(1987,12,5), CountryID=countries[12].CountryID, EmailAddress="anders.lund@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Robert King", Address="London, UK", DateOfBirth=new(1987,10,4), CountryID=countries[25].CountryID, Email="robert.king@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Sofia Marin", Address="Barcelona, Spain", DateOfBirth=new(1995,11,17), CountryID=countries[46].CountryID, Email="sofia.marin@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Hadi Barzan", Address="Erbil, Iraq", DateOfBirth=new(1991,9,2), CountryID=countries[24].CountryID, Email="hadi.barzan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Miguel Torres", Address="Santiago, Chile", DateOfBirth=new(1990,3,15), CountryID=countries[7].CountryID, Email="miguel.torres@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Erik Hansen", Address="Oslo, Norway", DateOfBirth=new(1986,5,10), CountryID=countries[35].CountryID, Email="erik.hansen@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Natalie Fischer", Address="Zurich, Switzerland", DateOfBirth=new(1998,1,29), CountryID=countries[48].CountryID, Email="natalie.fischer@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Samir Abbas", Address="Casablanca, Morocco", DateOfBirth=new(1989,6,7), CountryID=countries[31].CountryID, Email="samir.abbas@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Hiroshi Sato", Address="Nagoya, Japan", DateOfBirth=new(1994,8,30), CountryID=countries[28].CountryID, Email="hiroshi.sato@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Elif Kaya", Address="Istanbul, Turkey", DateOfBirth=new(1993,7,14), CountryID=countries[41].CountryID, Email="elif.kaya@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Anders Lund", Address="Copenhagen, Denmark", DateOfBirth=new(1987,12,5), CountryID=countries[12].CountryID, Email="anders.lund@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
 
                 // 60 left ...
 
-                new() { Name="Jin Ho Park", Address="Incheon, South Korea", DateOfBirth=new(1999,4,1), CountryID=countries[45].CountryID, EmailAddress="jin.park@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Maria Silva", Address="Rio de Janeiro, Brazil", DateOfBirth=new(1995,3,11), CountryID=countries[4].CountryID, EmailAddress="maria.silva@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Tariq Aziz", Address="Lahore, Pakistan", DateOfBirth=new(1992,10,18), CountryID=countries[36].CountryID, EmailAddress="tariq.aziz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Linda Olsen", Address="Helsinki, Finland", DateOfBirth=new(1986,2,9), CountryID=countries[15].CountryID, EmailAddress="linda.olsen@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Nikolai Ivanov", Address="Saint Petersburg, Russia", DateOfBirth=new(1988,8,6), CountryID=countries[42].CountryID, EmailAddress="nikolai.ivanov@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Farid Rahimi", Address="Isfahan, Iran", DateOfBirth=new(1990,4,22), CountryID=countries[23].CountryID, EmailAddress="farid.rahimi@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Sarah White", Address="Dublin, Ireland", DateOfBirth=new(1994,12,16), CountryID=countries[25].CountryID, EmailAddress="sarah.white@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="David Kim", Address="Daegu, South Korea", DateOfBirth=new(1991,11,26), CountryID=countries[45].CountryID, EmailAddress="david.kim@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Juan Alvarez", Address="Bogota, Colombia", DateOfBirth=new(1987,9,8), CountryID=countries[9].CountryID, EmailAddress="juan.alvarez@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Eva Schmidt", Address="Frankfurt, Germany", DateOfBirth=new(1993,6,3), CountryID=countries[17].CountryID, EmailAddress="eva.schmidt@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Jin Ho Park", Address="Incheon, South Korea", DateOfBirth=new(1999,4,1), CountryID=countries[45].CountryID, Email="jin.park@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Maria Silva", Address="Rio de Janeiro, Brazil", DateOfBirth=new(1995,3,11), CountryID=countries[4].CountryID, Email="maria.silva@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Tariq Aziz", Address="Lahore, Pakistan", DateOfBirth=new(1992,10,18), CountryID=countries[36].CountryID, Email="tariq.aziz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Linda Olsen", Address="Helsinki, Finland", DateOfBirth=new(1986,2,9), CountryID=countries[15].CountryID, Email="linda.olsen@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Nikolai Ivanov", Address="Saint Petersburg, Russia", DateOfBirth=new(1988,8,6), CountryID=countries[42].CountryID, Email="nikolai.ivanov@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Farid Rahimi", Address="Isfahan, Iran", DateOfBirth=new(1990,4,22), CountryID=countries[23].CountryID, Email="farid.rahimi@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Sarah White", Address="Dublin, Ireland", DateOfBirth=new(1994,12,16), CountryID=countries[25].CountryID, Email="sarah.white@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="David Kim", Address="Daegu, South Korea", DateOfBirth=new(1991,11,26), CountryID=countries[45].CountryID, Email="david.kim@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Juan Alvarez", Address="Bogota, Colombia", DateOfBirth=new(1987,9,8), CountryID=countries[9].CountryID, Email="juan.alvarez@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Eva Schmidt", Address="Frankfurt, Germany", DateOfBirth=new(1993,6,3), CountryID=countries[17].CountryID, Email="eva.schmidt@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
 
                 // 50 left ...
 
-                new() { Name="Ibrahim Saleh", Address="Jeddah, Saudi Arabia", DateOfBirth=new(1984,1,19), CountryID=countries[43].CountryID, EmailAddress="ibrahim.saleh@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Ahmet Yilmaz", Address="Ankara, Turkey", DateOfBirth=new(1988,7,7), CountryID=countries[41].CountryID, EmailAddress="ahmet.yilmaz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Lara Costa", Address="Porto, Portugal", DateOfBirth=new(1996,9,27), CountryID=countries[40].CountryID, EmailAddress="lara.costa@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Michael Lee", Address="Toronto, Canada", DateOfBirth=new(1992,5,14), CountryID=countries[6].CountryID, EmailAddress="michael.lee@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Olga Popov", Address="Minsk, Belarus", DateOfBirth=new(1993,11,9), CountryID=countries[42].CountryID, EmailAddress="olga.popov@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Henry Adams", Address="Chicago, USA", DateOfBirth=new(1987,3,1), CountryID=countries[49].CountryID, EmailAddress="henry.adams@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Nina Duarte", Address="Lima, Peru", DateOfBirth=new(1995,4,30), CountryID=countries[37].CountryID, EmailAddress="nina.duarte@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Mustafa Tariq", Address="Cairo, Egypt", DateOfBirth=new(1991,10,10), CountryID=countries[13].CountryID, EmailAddress="mustafa.tariq@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Kenji Ito", Address="Sapporo, Japan", DateOfBirth=new(1998,6,18), CountryID=countries[28].CountryID, EmailAddress="kenji.ito@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Rita Muller", Address="Zurich, Switzerland", DateOfBirth=new(1989,12,25), CountryID=countries[48].CountryID, EmailAddress="rita.muller@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Ibrahim Saleh", Address="Jeddah, Saudi Arabia", DateOfBirth=new(1984,1,19), CountryID=countries[43].CountryID, Email="ibrahim.saleh@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Ahmet Yilmaz", Address="Ankara, Turkey", DateOfBirth=new(1988,7,7), CountryID=countries[41].CountryID, Email="ahmet.yilmaz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Lara Costa", Address="Porto, Portugal", DateOfBirth=new(1996,9,27), CountryID=countries[40].CountryID, Email="lara.costa@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Michael Lee", Address="Toronto, Canada", DateOfBirth=new(1992,5,14), CountryID=countries[6].CountryID, Email="michael.lee@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Olga Popov", Address="Minsk, Belarus", DateOfBirth=new(1993,11,9), CountryID=countries[42].CountryID, Email="olga.popov@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Henry Adams", Address="Chicago, USA", DateOfBirth=new(1987,3,1), CountryID=countries[49].CountryID, Email="henry.adams@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Nina Duarte", Address="Lima, Peru", DateOfBirth=new(1995,4,30), CountryID=countries[37].CountryID, Email="nina.duarte@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Mustafa Tariq", Address="Cairo, Egypt", DateOfBirth=new(1991,10,10), CountryID=countries[13].CountryID, Email="mustafa.tariq@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Kenji Ito", Address="Sapporo, Japan", DateOfBirth=new(1998,6,18), CountryID=countries[28].CountryID, Email="kenji.ito@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Rita Muller", Address="Zurich, Switzerland", DateOfBirth=new(1989,12,25), CountryID=countries[48].CountryID, Email="rita.muller@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
 
                 // 40 left ...
 
-                new() { Name="Leo Martins", Address="Lisbon, Portugal", DateOfBirth=new(1990,7,3), CountryID=countries[40].CountryID, EmailAddress="leo.martins@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Hassan Naji", Address="Tehran, Iran", DateOfBirth=new(1986,9,21), CountryID=countries[23].CountryID, EmailAddress="hassan.naji@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Sven Johansson", Address="Gothenburg, Sweden", DateOfBirth=new(1994,10,28), CountryID=countries[47].CountryID, EmailAddress="sven.johansson@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Lin Chen", Address="Shenzhen, China", DateOfBirth=new(1997,8,5), CountryID=countries[8].CountryID, EmailAddress="lin.chen@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Oscar Nilsson", Address="Oslo, Norway", DateOfBirth=new(1991,12,30), CountryID=countries[35].CountryID, EmailAddress="oscar.nilsson@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Tina Kovac", Address="Zagreb, Croatia", DateOfBirth=new(1993,1,4), CountryID=countries[10].CountryID, EmailAddress="tina.kovac@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Mohammad Ali", Address="Karachi, Pakistan", DateOfBirth=new(1988,3,15), CountryID=countries[36].CountryID, EmailAddress="m.ali@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Kira Yamamoto", Address="Kyoto, Japan", DateOfBirth=new(1995,11,8), CountryID=countries[28].CountryID, EmailAddress="kira.yamamoto@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Leonardo Ruiz", Address="Buenos Aires, Argentina", DateOfBirth=new(1987,5,6), CountryID=countries[0].CountryID, EmailAddress="leo.ruiz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Zara Khan", Address="Lahore, Pakistan", DateOfBirth=new(1996,9,14), CountryID=countries[36].CountryID, EmailAddress="zara.khan@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Leo Martins", Address="Lisbon, Portugal", DateOfBirth=new(1990,7,3), CountryID=countries[40].CountryID, Email="leo.martins@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Hassan Naji", Address="Tehran, Iran", DateOfBirth=new(1986,9,21), CountryID=countries[23].CountryID, Email="hassan.naji@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Sven Johansson", Address="Gothenburg, Sweden", DateOfBirth=new(1994,10,28), CountryID=countries[47].CountryID, Email="sven.johansson@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Lin Chen", Address="Shenzhen, China", DateOfBirth=new(1997,8,5), CountryID=countries[8].CountryID, Email="lin.chen@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Oscar Nilsson", Address="Oslo, Norway", DateOfBirth=new(1991,12,30), CountryID=countries[35].CountryID, Email="oscar.nilsson@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Tina Kovac", Address="Zagreb, Croatia", DateOfBirth=new(1993,1,4), CountryID=countries[10].CountryID, Email="tina.kovac@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Mohammad Ali", Address="Karachi, Pakistan", DateOfBirth=new(1988,3,15), CountryID=countries[36].CountryID, Email="m.ali@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Kira Yamamoto", Address="Kyoto, Japan", DateOfBirth=new(1995,11,8), CountryID=countries[28].CountryID, Email="kira.yamamoto@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Leonardo Ruiz", Address="Buenos Aires, Argentina", DateOfBirth=new(1987,5,6), CountryID=countries[0].CountryID, Email="leo.ruiz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Zara Khan", Address="Lahore, Pakistan", DateOfBirth=new(1996,9,14), CountryID=countries[36].CountryID, Email="zara.khan@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
 
                 // 30 left ...
 
-                new() { Name="Viktor Stojan", Address="Belgrade, Serbia", DateOfBirth=new(1990,4,19), CountryID=countries[44].CountryID, EmailAddress="viktor.stojan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Helena Petrova", Address="Moscow, Russia", DateOfBirth=new(1989,11,23), CountryID=countries[42].CountryID, EmailAddress="helena.petrova@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Jasper van Dijk", Address="Amsterdam, Netherlands", DateOfBirth=new(1994,6,1), CountryID=countries[32].CountryID, EmailAddress="jasper.dijk@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Isabelle Laurent", Address="Paris, France", DateOfBirth=new(1991,7,12), CountryID=countries[16].CountryID, EmailAddress="isabelle.laurent@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Mahdi Rahman", Address="Jakarta, Indonesia", DateOfBirth=new(1988,8,18), CountryID=countries[22].CountryID, EmailAddress="mahdi.rahman@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Anna Muller", Address="Berlin, Germany", DateOfBirth=new(1995,2,27), CountryID=countries[17].CountryID, EmailAddress="anna.muller@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Tomas Novak", Address="Prague, Czech Republic", DateOfBirth=new(1986,10,7), CountryID=countries[11].CountryID, EmailAddress="tomas.novak@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Layla Singh", Address="Delhi, India", DateOfBirth=new(1993,1,30), CountryID=countries[21].CountryID, EmailAddress="layla.singh@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Marco Suarez", Address="Mexico City, Mexico", DateOfBirth=new(1991,9,17), CountryID=countries[30].CountryID, EmailAddress="marco.suarez@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Hailey Brown", Address="Toronto, Canada", DateOfBirth=new(1998,3,9), CountryID=countries[6].CountryID, EmailAddress="hailey.brown@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Viktor Stojan", Address="Belgrade, Serbia", DateOfBirth=new(1990,4,19), CountryID=countries[44].CountryID, Email="viktor.stojan@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Helena Petrova", Address="Moscow, Russia", DateOfBirth=new(1989,11,23), CountryID=countries[42].CountryID, Email="helena.petrova@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Jasper van Dijk", Address="Amsterdam, Netherlands", DateOfBirth=new(1994,6,1), CountryID=countries[32].CountryID, Email="jasper.dijk@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Isabelle Laurent", Address="Paris, France", DateOfBirth=new(1991,7,12), CountryID=countries[16].CountryID, Email="isabelle.laurent@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Mahdi Rahman", Address="Jakarta, Indonesia", DateOfBirth=new(1988,8,18), CountryID=countries[22].CountryID, Email="mahdi.rahman@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Anna Muller", Address="Berlin, Germany", DateOfBirth=new(1995,2,27), CountryID=countries[17].CountryID, Email="anna.muller@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Tomas Novak", Address="Prague, Czech Republic", DateOfBirth=new(1986,10,7), CountryID=countries[11].CountryID, Email="tomas.novak@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Layla Singh", Address="Delhi, India", DateOfBirth=new(1993,1,30), CountryID=countries[21].CountryID, Email="layla.singh@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Marco Suarez", Address="Mexico City, Mexico", DateOfBirth=new(1991,9,17), CountryID=countries[30].CountryID, Email="marco.suarez@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Hailey Brown", Address="Toronto, Canada", DateOfBirth=new(1998,3,9), CountryID=countries[6].CountryID, Email="hailey.brown@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
 
                 // 20 left ...
 
-                new() { Name="Sami Nasser", Address="Doha, Qatar", DateOfBirth=new(1987,6,28), CountryID=countries[43].CountryID, EmailAddress="sami.nasser@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Elena Ivanova", Address="Saint Petersburg, Russia", DateOfBirth=new(1996,11,4), CountryID=countries[42].CountryID, EmailAddress="elena.ivanova@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Daniel Ortega", Address="Lima, Peru", DateOfBirth=new(1989,5,12), CountryID=countries[37].CountryID, EmailAddress="daniel.ortega@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Akira Fujita", Address="Tokyo, Japan", DateOfBirth=new(1994,10,13), CountryID=countries[28].CountryID, EmailAddress="akira.fujita@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Nadia Selim", Address="Casablanca, Morocco", DateOfBirth=new(1993,4,18), CountryID=countries[31].CountryID, EmailAddress="nadia.selim@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Jonas Lund", Address="Stockholm, Sweden", DateOfBirth=new(1992,8,27), CountryID=countries[47].CountryID, EmailAddress="jonas.lund@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Karen Lee", Address="Vancouver, Canada", DateOfBirth=new(1988,1,11), CountryID=countries[6].CountryID, EmailAddress="karen.lee@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Olivier Dupont", Address="Paris, France", DateOfBirth=new(1990,5,22), CountryID=countries[16].CountryID, EmailAddress="olivier.dupont@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Hiro Tanaka", Address="Tokyo, Japan", DateOfBirth=new(1997,7,6), CountryID=countries[28].CountryID, EmailAddress="hiro.tanaka@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Sonia Gupta", Address="Mumbai, India", DateOfBirth=new(1994,6,2), CountryID=countries[21].CountryID, EmailAddress="sonia.gupta@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Sami Nasser", Address="Doha, Qatar", DateOfBirth=new(1987,6,28), CountryID=countries[43].CountryID, Email="sami.nasser@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Elena Ivanova", Address="Saint Petersburg, Russia", DateOfBirth=new(1996,11,4), CountryID=countries[42].CountryID, Email="elena.ivanova@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Daniel Ortega", Address="Lima, Peru", DateOfBirth=new(1989,5,12), CountryID=countries[37].CountryID, Email="daniel.ortega@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Akira Fujita", Address="Tokyo, Japan", DateOfBirth=new(1994,10,13), CountryID=countries[28].CountryID, Email="akira.fujita@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Nadia Selim", Address="Casablanca, Morocco", DateOfBirth=new(1993,4,18), CountryID=countries[31].CountryID, Email="nadia.selim@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Jonas Lund", Address="Stockholm, Sweden", DateOfBirth=new(1992,8,27), CountryID=countries[47].CountryID, Email="jonas.lund@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Karen Lee", Address="Vancouver, Canada", DateOfBirth=new(1988,1,11), CountryID=countries[6].CountryID, Email="karen.lee@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Olivier Dupont", Address="Paris, France", DateOfBirth=new(1990,5,22), CountryID=countries[16].CountryID, Email="olivier.dupont@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Hiro Tanaka", Address="Tokyo, Japan", DateOfBirth=new(1997,7,6), CountryID=countries[28].CountryID, Email="hiro.tanaka@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Sonia Gupta", Address="Mumbai, India", DateOfBirth=new(1994,6,2), CountryID=countries[21].CountryID, Email="sonia.gupta@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
 
                 // FINAL 10 ...
 
-                new() { Name="Leon Schmidt", Address="Munich, Germany", DateOfBirth=new(1989,9,8), CountryID=countries[17].CountryID, EmailAddress="leon.schmidt@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Ayaka Sato", Address="Osaka, Japan", DateOfBirth=new(1995,12,20), CountryID=countries[28].CountryID, EmailAddress="ayaka.sato@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Mohsen Rezaei", Address="Tehran, Iran", DateOfBirth=new(1991,3,14), CountryID=countries[23].CountryID, EmailAddress="mohsen.rezaei@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Bruce Allen", Address="Los Angeles, USA", DateOfBirth=new(1986,7,9), CountryID=countries[49].CountryID, EmailAddress="bruce.allen@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Lina Park", Address="Seoul, South Korea", DateOfBirth=new(1993,1,1), CountryID=countries[45].CountryID, EmailAddress="lina.park@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
-                new() { Name="Rafael Díaz", Address="Bogota, Colombia", DateOfBirth=new(1992,4,26), CountryID=countries[9].CountryID, EmailAddress="rafael.diaz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Khadija Karim", Address="Casablanca, Morocco", DateOfBirth=new(1994,5,15), CountryID=countries[31].CountryID, EmailAddress="khadija.karim@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
-                new() { Name="Abdul Rahman", Address="Jeddah, Saudi Arabia", DateOfBirth=new(1987,2,23), CountryID=countries[43].CountryID, EmailAddress="abdul.rahman@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
-                new() { Name="Takumi Mori", Address="Tokyo, Japan", DateOfBirth=new(1999,6,14), CountryID=countries[28].CountryID, EmailAddress="takumi.mori@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
-                new() { Name="Emily Clark", Address="Boston, USA", DateOfBirth=new(1996,8,12), CountryID=countries[49].CountryID, EmailAddress="emily.clark@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true }
+                new() { PersonName="Leon Schmidt", Address="Munich, Germany", DateOfBirth=new(1989,9,8), CountryID=countries[17].CountryID, Email="leon.schmidt@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Ayaka Sato", Address="Osaka, Japan", DateOfBirth=new(1995,12,20), CountryID=countries[28].CountryID, Email="ayaka.sato@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Mohsen Rezaei", Address="Tehran, Iran", DateOfBirth=new(1991,3,14), CountryID=countries[23].CountryID, Email="mohsen.rezaei@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Bruce Allen", Address="Los Angeles, USA", DateOfBirth=new(1986,7,9), CountryID=countries[49].CountryID, Email="bruce.allen@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Lina Park", Address="Seoul, South Korea", DateOfBirth=new(1993,1,1), CountryID=countries[45].CountryID, Email="lina.park@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true },
+                new() { PersonName="Rafael Díaz", Address="Bogota, Colombia", DateOfBirth=new(1992,4,26), CountryID=countries[9].CountryID, Email="rafael.diaz@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Khadija Karim", Address="Casablanca, Morocco", DateOfBirth=new(1994,5,15), CountryID=countries[31].CountryID, Email="khadija.karim@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=false },
+                new() { PersonName="Abdul Rahman", Address="Jeddah, Saudi Arabia", DateOfBirth=new(1987,2,23), CountryID=countries[43].CountryID, Email="abdul.rahman@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=true },
+                new() { PersonName="Takumi Mori", Address="Tokyo, Japan", DateOfBirth=new(1999,6,14), CountryID=countries[28].CountryID, Email="takumi.mori@test.com", Gender=GenderOptions.Male, ReceiveNewsLetters=false },
+                new() { PersonName="Emily Clark", Address="Boston, USA", DateOfBirth=new(1996,8,12), CountryID=countries[49].CountryID, Email="emily.clark@test.com", Gender=GenderOptions.Female, ReceiveNewsLetters=true }
             };
 
             //--------------------------------------------------------------
@@ -278,7 +278,7 @@ namespace Tests
         public void AddPerson_PersonNameNull()
         {
             //Arrange
-            PersonAddRequest? personAddRequest = new PersonAddRequest() { Name = null };
+            PersonAddRequest? personAddRequest = new PersonAddRequest() { PersonName = null };
             //Act & Assert
             Assert.Throws<ArgumentException>(() => _PersonsService.AddPerson(personAddRequest));
         }
@@ -289,20 +289,20 @@ namespace Tests
             //Arrange
             PersonAddRequest? personAddRequest = new PersonAddRequest()
             {
-                Name = "Dan",
+                PersonName = "Dan",
                 Address = "123 Street, City",
                 DateOfBirth = new DateTime(1990, 1, 1),
                 CountryID = Guid.NewGuid(),
-                EmailAddress = "asd@gmail.com",
+                Email = "asd@gmail.com",
                 Gender = GenderOptions.Male,
                 ReceiveNewsLetters = true,
             };
             //Act
             PersonResponse personResponse = _PersonsService.AddPerson(personAddRequest);
-            List<PersonResponse> allPersons = _PersonsService.GetPersonList();
+            List<PersonResponse> allPersons = _PersonsService.GetAllPersons();
 
             //Assert
-            Assert.True(personResponse.ID != Guid.Empty);
+            Assert.True(personResponse.PersonID != Guid.Empty);
             Assert.Contains(personResponse, allPersons);
         }
 
@@ -333,18 +333,18 @@ namespace Tests
 
             PersonAddRequest personAddRequest = new PersonAddRequest()
             {
-                Name = "Akira",
+                PersonName = "Akira",
                 Address = "Tokyo, Japan",
                 DateOfBirth = new DateTime(1985, 5, 15),
                 CountryID = countryResponse.CountryID,
-                EmailAddress = "Akira@gmail.com",
+                Email = "Akira@gmail.com",
                 Gender = GenderOptions.Female,
                 ReceiveNewsLetters = true,
             };
 
             PersonResponse personResponseAdded = _PersonsService.AddPerson(personAddRequest);
             //Act
-            PersonResponse? personResponse = _PersonsService.GetPersonByPersonID(personResponseAdded.ID);
+            PersonResponse? personResponse = _PersonsService.GetPersonByPersonID(personResponseAdded.PersonID);
 
             //Assert
             Assert.Equal(personResponseAdded, personResponse);
@@ -361,7 +361,7 @@ namespace Tests
         {
             //Arrange
             //Act
-            List<PersonResponse> allPersons = _PersonsService.GetPersonList();
+            List<PersonResponse> allPersons = _PersonsService.GetAllPersons();
             //Assert
             Assert.Empty(allPersons);
         }
@@ -374,7 +374,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons = _PersonsService.GetPersonList();
+            List<PersonResponse> allPersons = _PersonsService.GetAllPersons();
 
             // print allPersons
 
@@ -404,7 +404,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersonsList(nameof(Person.Name), "");
+            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersons(nameof(Person.PersonName), "");
 
             // print allPersons
 
@@ -430,7 +430,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersonsList(nameof(Person.Name), "John");
+            List<PersonResponse> allPersons_from_Search = _PersonsService.GetFilteredPersons(nameof(Person.PersonName), "John");
 
             // print allPersons
 
@@ -444,9 +444,9 @@ namespace Tests
             //Assert
             foreach (PersonResponse personResponse in personResponses_fromAdditions)
             {
-                if (personResponse.Name != null)
+                if (personResponse.PersonName != null)
                 {
-                    if (personResponse.Name.Contains("John", StringComparison.OrdinalIgnoreCase))
+                    if (personResponse.PersonName.Contains("John", StringComparison.OrdinalIgnoreCase))
                     {
                         Assert.Contains(personResponse, allPersons_from_Search);
                     }
@@ -464,7 +464,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_sorted = _PersonsService.GetSortedPersons(personResponses_fromAdditions, nameof(Person.Name), SortOrderOptions.DESCENDING);
+            List<PersonResponse> allPersons_sorted = _PersonsService.GetSortedPersons(personResponses_fromAdditions, nameof(Person.PersonName), SortOrderOptions.DESC);
             // print allPersons
             _testOutputHelper.WriteLine("actual: ");
             foreach (PersonResponse pr in allPersons_sorted)
@@ -472,12 +472,12 @@ namespace Tests
                 _testOutputHelper.WriteLine(pr.ToString());
             }
 
-            personResponses_fromAdditions = personResponses_fromAdditions.OrderByDescending(temp => temp.Name).ToList();
+            personResponses_fromAdditions = personResponses_fromAdditions.OrderByDescending(temp => temp.PersonName).ToList();
 
             //Assert
             for (int i = 0; i < allPersons_sorted.Count; i++)
             {
-                Assert.Equal(allPersons_sorted[i].Name, personResponses_fromAdditions[i].Name);
+                Assert.Equal(allPersons_sorted[i].PersonName, personResponses_fromAdditions[i].PersonName);
             }
         }
 
@@ -500,7 +500,7 @@ namespace Tests
         public void UpdatePerson_PersonNameNull()
         {
             //Arrange
-            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { Name = null };
+            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { PersonName = null };
             //Act & Assert
             Assert.Throws<ArgumentException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
         }
@@ -511,7 +511,7 @@ namespace Tests
         {
             //Arrange
             AddSamplePersons();
-            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { ID = Guid.NewGuid(), Name = "Mr.house" };
+            PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { PersonID = Guid.NewGuid(), PersonName = "Mr.house" };
             //Act & Assert
             Assert.Throws<ArgumentException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
         }
@@ -526,12 +526,12 @@ namespace Tests
             PersonResponse CountryIDPerson = personResponses_fromAdditions[1];
             PersonUpdateRequest personUpdateRequest = new PersonUpdateRequest()
             {
-                ID = personToUpdate.ID,
-                Name = "Updated Name",
+                PersonID = personToUpdate.PersonID,
+                PersonName = "Updated Name",
                 Address = "Updated Address",
                 DateOfBirth = new DateTime(2000, 1, 1),
                 CountryID = CountryIDPerson.CountryID,
-                EmailAddress = "UpdatedEmail@gmail.com",
+                Email = "UpdatedEmail@gmail.com",
                 Gender = GenderOptions.Female,
                 ReceiveNewsLetters = !personToUpdate.ReceiveNewsLetters,
             };
@@ -539,12 +539,12 @@ namespace Tests
             PersonResponse person_Response_From_Update = _PersonsService.UpdatePerson(personUpdateRequest);
 
             //Assert
-            Assert.Equal(personUpdateRequest.ID, person_Response_From_Update.ID);
-            Assert.NotEqual(personUpdateRequest.Name, personToUpdate.Name);
+            Assert.Equal(personUpdateRequest.PersonID, person_Response_From_Update.PersonID);
+            Assert.NotEqual(personUpdateRequest.PersonName, personToUpdate.PersonName);
             Assert.NotEqual(personUpdateRequest.Address, personToUpdate.Address);
             Assert.NotEqual(personUpdateRequest.DateOfBirth, personToUpdate.DateOfBirth);
-            Assert.NotEqual(personUpdateRequest.EmailAddress, personToUpdate.EmailAddress);
-            Assert.NotEqual(personUpdateRequest.Gender, personToUpdate.Gender);
+            Assert.NotEqual(personUpdateRequest.Email, personToUpdate.Email);
+            Assert.NotEqual(personUpdateRequest.Gender.ToString(), personToUpdate.Gender);
             Assert.NotEqual(personUpdateRequest.CountryID, personToUpdate.CountryID);
             Assert.NotEqual(personUpdateRequest.ReceiveNewsLetters, personToUpdate.ReceiveNewsLetters);
         }
@@ -582,8 +582,8 @@ namespace Tests
             List<PersonResponse> personResponses_fromAdditions = AddSamplePersons();
             PersonResponse personToDelete = personResponses_fromAdditions[0];
             //Act
-            _PersonsService.DeletePerson(personToDelete.ID);
-            List<PersonResponse> allPersons = _PersonsService.GetPersonList();
+            _PersonsService.DeletePerson(personToDelete.PersonID);
+            List<PersonResponse> allPersons = _PersonsService.GetAllPersons();
             //Assert
             Assert.DoesNotContain(personToDelete, allPersons);
         }
