@@ -103,7 +103,7 @@ namespace CRUDContactManager.Controllers
         }
 
         //Executed when HTTP POST /persons/Update
-        [Route("[Action]")]
+        [Route("[Action]/{personID}")]
         [HttpPost]
         public IActionResult Update(UpdatePersonViewModel model)
         {
