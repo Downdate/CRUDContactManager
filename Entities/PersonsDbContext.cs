@@ -33,6 +33,23 @@ namespace Entities
 
             foreach (Person person in persons)
                 modelBuilder.Entity<Person>().HasData(person);
+
+            //Fluent API
+
+            modelBuilder.Entity<Person>().Property(temp => temp.TIN)
+                .HasColumnName("TaxIdentificationNumber")
+                .HasColumnType("varchar(8)")
+                .HasDefaultValue("ABC12345");
+            //modelBuilder.Entity<Person>()
+            //    .HasIndex(temp => temp.TIN).IsUnique();
+
+            modelBuilder.Entity<Person>(entity =>
+            {
+                entity.ToTable(temp => temp.HasCheckConstraint(
+                    name: "CHK_TIN",
+                    sql: "LEN([TaxIdentificationNumber]) = 8"
+                ));
+            });
         }
     }
 }
