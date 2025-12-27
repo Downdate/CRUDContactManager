@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(PersonsDbContext))]
-    [Migration("20251223161656_Initial")]
-    partial class Initial
+    [Migration("20251227155812_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,6 +96,9 @@ namespace Entities.Migrations
 
                     b.Property<bool>("ReceiveNewsLetters")
                         .HasColumnType("bit");
+
+                    b.Property<string>("TIN")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PersonID");
 

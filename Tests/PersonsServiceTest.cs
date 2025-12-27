@@ -9,6 +9,7 @@ using System.Text;
 using Xunit;
 using Xunit.Abstractions;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tests
 {
@@ -24,8 +25,8 @@ namespace Tests
 
         public PersonsServiceTest(ITestOutputHelper testOutputHelper)
         {
-            _PersonsService = new PersonsService(false);
-            _countriesService = new CountriesService(false);
+            _countriesService = new CountriesService(new PersonsDbContext(new DbContextOptionsBuilder<PersonsDbContext>().Options));
+            _PersonsService = new PersonsService(new PersonsDbContext(new DbContextOptionsBuilder<PersonsDbContext>().Options), _countriesService);
             _testOutputHelper = testOutputHelper;
         }
 
