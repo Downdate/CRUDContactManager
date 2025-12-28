@@ -25,7 +25,7 @@ namespace CRUDContactManager.Controllers
 
         [Route("[Action]")]
         [Route("/")]
-        public IActionResult Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
+        public async Task<IActionResult> Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
             //Search
             ViewBag.SearchFields = new Dictionary<string, string>()
@@ -37,7 +37,7 @@ namespace CRUDContactManager.Controllers
                 {nameof(PersonResponse.Age), "Age" },
                 {nameof(PersonResponse.Gender),"Gender" }
             };
-            List<PersonResponse> persons = _personsService.GetFilteredPersons(searchBy, searchString);
+            List<PersonResponse> persons = await _personsService.GetFilteredPersons(searchBy, searchString);
 
             ViewBag.CurrentSearchBy = searchBy;
             ViewBag.CurrentSearchString = searchString;
@@ -52,7 +52,7 @@ namespace CRUDContactManager.Controllers
                 {nameof(PersonResponse.Age), "Age" },
                 {nameof(PersonResponse.Gender), "Gender" },
             };
-            persons = _personsService.GetSortedPersons(persons, sortBy, sortOrder);
+            persons = await _personsService.GetSortedPersons(persons, sortBy, sortOrder);
             ViewBag.CurrentSortBy = sortBy;
             ViewBag.CurrentSortOrder = sortOrder;
 
@@ -65,7 +65,7 @@ namespace CRUDContactManager.Controllers
         public async Task<IActionResult> Create()
         {
             CreatePersonViewModel model = new CreatePersonViewModel();
-            model.Countries = _countriesService.GetAllCountries();
+            model.Countries = await _countriesService.GetAllCountries();
 
             return View(model);
         }
@@ -73,15 +73,15 @@ namespace CRUDContactManager.Controllers
         //Executed when HTTP POST /persons/create
         [Route("[Action]")]
         [HttpPost]
-        public IActionResult Create(CreatePersonViewModel model)
+        public async Task<IActionResult> Create(CreatePersonViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                model.Countries = _countriesService.GetAllCountries();
+                model.Countries = await _countriesService.GetAllCountries();
                 return View(model);
             }
 
-            _personsService.AddPerson(model.Person);
+            await _personsService.AddPerson(model.Person);
             return RedirectToAction("Index");
         }
 
@@ -91,8 +91,8 @@ namespace CRUDContactManager.Controllers
         public async Task<IActionResult> Update(Guid personID)
         {
             UpdatePersonViewModel model = new UpdatePersonViewModel();
-            model.Countries = _countriesService.GetAllCountries();
-            PersonResponse? personResponse = _personsService.GetPersonByPersonID(personID);
+            model.Countries = await _countriesService.GetAllCountries();
+            PersonResponse? personResponse = await _personsService.GetPersonByPersonID(personID);
             if (personResponse == null)
             {
                 return RedirectToAction("Index");
@@ -105,24 +105,24 @@ namespace CRUDContactManager.Controllers
         //Executed when HTTP POST /persons/Update
         [Route("[Action]/{personID}")]
         [HttpPost]
-        public IActionResult Update(UpdatePersonViewModel model)
+        public async Task<IActionResult> Update(UpdatePersonViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                model.Countries = _countriesService.GetAllCountries();
+                model.Countries = await _countriesService.GetAllCountries();
                 return View(model);
             }
 
-            _personsService.UpdatePerson(model.Person);
+            await _personsService.UpdatePerson(model.Person);
             return RedirectToAction("Index");
         }
 
         //Executed when HTTP GET /persons/Delete
         [Route("[action]/{personID}")]
         [HttpGet]
-        public IActionResult Delete(Guid personID)
+        public async Task<IActionResult> Delete(Guid personID)
         {
-            PersonResponse? personResponse = _personsService.GetPersonByPersonID(personID);
+            PersonResponse? personResponse = await _personsService.GetPersonByPersonID(personID);
             if (personResponse == null)
             {
                 return RedirectToAction("Index");

@@ -203,19 +203,11 @@ namespace Services
 
         public async Task<bool> DeletePerson(Guid? personID)
         {
-            if (personID == null)
-            {
-                throw new ArgumentNullException(nameof(personID));
-            }
+            var rows = await _DbContext.Persons
+                .Where(p => p.PersonID == personID)
+                .ExecuteDeleteAsync();
 
-            Person? person = await _DbContext.Persons.Include("Country").FirstOrDefaultAsync(temp => temp.PersonID == personID);
-            if (person == null)
-                return false;
-
-            _DbContext.Persons.Remove(_DbContext.Persons.Include("Country").First(temp => temp.PersonID == personID));
-            await _DbContext.SaveChangesAsync();
-
-            return true;
+            return rows > 0;
         }
     }
 }
