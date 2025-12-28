@@ -50,6 +50,14 @@ namespace Entities
                     sql: "LEN([TaxIdentificationNumber]) = 8"
                 ));
             });
+
+            // Relationships
+            //modelBuilder.Entity<Person>(entity =>
+            //{
+            //    entity.HasOne<Country>(c => c.Country)
+            //    .WithMany(p => p.Persons)
+            //    .HasForeignKey(c => c.CountryID);
+            //});
         }
     }
 }

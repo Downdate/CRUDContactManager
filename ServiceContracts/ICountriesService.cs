@@ -12,13 +12,13 @@ namespace ServiceContracts
         /// </summary>
         /// <param name="countryAddRequest">Country object to be added</param>
         /// <returns>Returns the country object after adding it (including newly generated country id) </returns>
-        CountryResponse AddCountry(CountryAddRequest? countryAddRequest);
+        Task<CountryResponse> AddCountry(CountryAddRequest? countryAddRequest);
 
         /// <summary>
         /// Returns all countries from the list
         /// </summary>
         /// <returns>Returns all countries from the list as a list of CountryResponse</returns>
-        List<CountryResponse> GetAllCountries();
+        Task<List<CountryResponse>> GetAllCountries();
 
         /// <summary>
         /// Retrieves country information for the specified country identifier.
@@ -27,6 +27,6 @@ namespace ServiceContracts
         /// is selected.</param>
         /// <returns>A <see cref="CountryResponse"/> containing details of the country if found; otherwise, <see
         /// langword="null"/>.</returns>
-        CountryResponse? GetCountryByCountryID(Guid? countryID);
+        Task<CountryResponse?> GetCountryByCountryID(Guid? countryID);
     }
 }
