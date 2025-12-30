@@ -1,5 +1,6 @@
 ﻿using CRUDContactManager.ViewModels.Persons;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.Enums;
@@ -137,6 +138,27 @@ namespace CRUDContactManager.Controllers
         {
             _personsService.DeletePerson(model.PersonID);
             return RedirectToAction("Index");
+        }
+
+        [Route("[Action]")]
+        public async Task<IActionResult> PersonsPDF()
+        {
+            //Get List of Persons
+            List<PersonResponse> persons = await _personsService.GetAllPersons();
+            return new ViewAsPdf("PersonsPDF", persons, ViewData)
+            {
+                PageMargins = new Rotativa.AspNetCore.Options.Margins(20, 20, 20, 20),
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Landscape,
+                CustomSwitches = "--enable-local-file-access"
+            };
+        }
+
+        [Route("[Action]")]
+        public async Task<IActionResult> PersonsCSV()
+        {
+            MemoryStream memoryStream = await _personsService.GetPersonsCSV();
+
+            return File(memoryStream, "application/octet-stream", "persons.csv");
         }
     }
 }

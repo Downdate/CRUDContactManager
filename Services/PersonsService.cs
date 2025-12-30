@@ -7,6 +7,8 @@ using Services.Helpers;
 using ServiceContracts.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using CsvHelper;
+using System.Globalization;
 
 namespace Services
 {
@@ -208,6 +210,20 @@ namespace Services
                 .ExecuteDeleteAsync();
 
             return rows > 0;
+        }
+
+        public async Task<MemoryStream> GetPersonsCSV()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            StreamWriter streamWriter = new StreamWriter(memoryStream);
+            CsvWriter csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture, leaveOpen: true);
+            csvWriter.WriteHeader<PersonResponse>();
+            csvWriter.NextRecord();
+            List<PersonResponse> persons = await GetAllPersons();
+            await csvWriter.WriteRecordsAsync(persons);
+            memoryStream.Position = 0;
+
+            return memoryStream;
         }
     }
 }
