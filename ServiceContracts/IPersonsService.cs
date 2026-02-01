@@ -60,6 +60,20 @@ namespace ServiceContracts
         /// <returns>Returns true, if the deletion is successful; otherwise false</returns>
         Task<bool> DeletePerson(Guid? personID);
 
+        /// <summary>
+        /// Asynchronously generates a CSV file containing data for all persons.
+        /// </summary>
+        /// <remarks>The caller is responsible for disposing the returned <see cref="MemoryStream"/> after
+        /// use. The CSV format includes all available person records and uses UTF-8 encoding.</remarks>
+        /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="MemoryStream"/>
+        /// with the CSV data for all persons. The stream's position is set to the beginning.</returns>
         Task<MemoryStream> GetPersonsCSV();
+
+        /// <summary>
+        /// Asynchronously generates an Excel file containing a list of persons.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous operation. The task result contains a memory stream with the Excel
+        /// file data. The caller is responsible for disposing the returned stream.</returns>
+        Task<MemoryStream> GetPersonsExcel();
     }
 }

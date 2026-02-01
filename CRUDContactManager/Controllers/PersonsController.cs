@@ -160,5 +160,13 @@ namespace CRUDContactManager.Controllers
 
             return File(memoryStream, "application/octet-stream", "persons.csv");
         }
+
+        [Route("[Action]")]
+        public async Task<IActionResult> PersonsExcel()
+        {
+            MemoryStream memoryStream = await _personsService.GetPersonsExcel();
+
+            return File(memoryStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "persons.xlsx");
+        }
     }
 }

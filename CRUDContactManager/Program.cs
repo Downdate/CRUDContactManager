@@ -2,6 +2,7 @@ using ServiceContracts;
 using Services;
 using Microsoft.EntityFrameworkCore;
 using Entities;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<PersonsDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+ExcelPackage.License.SetNonCommercialPersonal("Downdate");
 
 var app = builder.Build();
 
