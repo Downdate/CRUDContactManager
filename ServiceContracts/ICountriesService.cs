@@ -41,6 +41,6 @@ namespace ServiceContracts
         /// valid Excel format.</param>
         /// <returns>A task that represents the asynchronous operation. The task result contains the number of countries that
         /// were successfully uploaded from the Excel file.</returns>
-        Task<int> UploadCountriesFromExcelFile(IFormFile formFile);
+        Task<int> UploadCountriesFromExcelFileAsync(IFormFile formFile);
     }
 }
