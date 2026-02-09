@@ -1,23 +1,24 @@
 ﻿using Entities;
+using EntityFrameworkCoreMock;
+using Microsoft.EntityFrameworkCore;
 using ServiceContracts;
 using ServiceContracts.DTO;
 using ServiceContracts.Enums;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Tests
 {
     public class PersonsServiceTest
     {
         //private fields
-        private readonly IPersonsService _PersonsService;
+        private readonly IPersonsService _personsService;
 
         private readonly ICountriesService _countriesService;
         private readonly ITestOutputHelper _testOutputHelper;
@@ -26,8 +27,20 @@ namespace Tests
 
         public PersonsServiceTest(ITestOutputHelper testOutputHelper)
         {
-            _countriesService = new CountriesService(new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>().Options));
-            _PersonsService = new PersonsService(new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>().Options), _countriesService);
+            var countriesInitialData = new List<Country>();
+            var personsInitialData = new List<Person>();
+
+            DbContextMock<ApplicationDbContext> dbContextMock = new DbContextMock<ApplicationDbContext>(
+                new DbContextOptionsBuilder<ApplicationDbContext>().Options
+                );
+
+            dbContextMock.CreateDbSetMock(temp => temp.Countries, countriesInitialData);
+            dbContextMock.CreateDbSetMock(temp => temp.Persons, personsInitialData);
+
+            var dbContext = dbContextMock.Object;
+
+            _countriesService = new CountriesService(dbContext);
+            _personsService = new PersonsService(dbContext, _countriesService);
             _testOutputHelper = testOutputHelper;
         }
 
@@ -246,7 +259,7 @@ namespace Tests
             List<PersonResponse> personResponses_fromAdditions = new();
             foreach (var req in personList)
             {
-                personResponses_fromAdditions.Add(await _PersonsService.AddPerson(req));
+                personResponses_fromAdditions.Add(await _personsService.AddPerson(req));
             }
 
             //print personResponses_fromAdditions
@@ -271,7 +284,7 @@ namespace Tests
             //Arrange
             PersonAddRequest? personAddRequest = null;
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _PersonsService.AddPerson(personAddRequest));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _personsService.AddPerson(personAddRequest));
         }
 
         // When we supply with null value as PersonName it should throw argumentException
@@ -282,7 +295,7 @@ namespace Tests
             //Arrange
             PersonAddRequest? personAddRequest = new PersonAddRequest() { PersonName = null };
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _PersonsService.AddPerson(personAddRequest));
+            await Assert.ThrowsAsync<ArgumentException>(() => _personsService.AddPerson(personAddRequest));
         }
 
         [Fact]
@@ -300,8 +313,8 @@ namespace Tests
                 ReceiveNewsLetters = true,
             };
             //Act
-            PersonResponse personResponse = await _PersonsService.AddPerson(personAddRequest);
-            List<PersonResponse> allPersons = await _PersonsService.GetAllPersons();
+            PersonResponse personResponse = await _personsService.AddPerson(personAddRequest);
+            List<PersonResponse> allPersons = await _personsService.GetAllPersons();
 
             //Assert
             Assert.True(personResponse.PersonID != Guid.Empty);
@@ -321,7 +334,7 @@ namespace Tests
             Guid? personID = null;
 
             //Act , Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _PersonsService.GetPersonByPersonID(personID));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _personsService.GetPersonByPersonID(personID));
         }
 
         //if personID is valid, should return valid person
@@ -344,9 +357,9 @@ namespace Tests
                 ReceiveNewsLetters = true,
             };
 
-            PersonResponse personResponseAdded = await _PersonsService.AddPerson(personAddRequest);
+            PersonResponse personResponseAdded = await _personsService.AddPerson(personAddRequest);
             //Act
-            PersonResponse? personResponse = await _PersonsService.GetPersonByPersonID(personResponseAdded.PersonID);
+            PersonResponse? personResponse = await _personsService.GetPersonByPersonID(personResponseAdded.PersonID);
 
             //Assert
             Assert.Equal(personResponseAdded, personResponse);
@@ -363,7 +376,7 @@ namespace Tests
         {
             //Arrange
             //Act
-            List<PersonResponse> allPersons = await _PersonsService.GetAllPersons();
+            List<PersonResponse> allPersons = await _personsService.GetAllPersons();
             //Assert
             Assert.Empty(allPersons);
         }
@@ -376,7 +389,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = await AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons = await _PersonsService.GetAllPersons();
+            List<PersonResponse> allPersons = await _personsService.GetAllPersons();
 
             // print allPersons
 
@@ -406,7 +419,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = await AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_from_Search = await _PersonsService.GetFilteredPersons(nameof(Person.PersonName), "");
+            List<PersonResponse> allPersons_from_Search = await _personsService.GetFilteredPersons(nameof(Person.PersonName), "");
 
             // print allPersons
 
@@ -432,7 +445,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = await AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_from_Search = await _PersonsService.GetFilteredPersons(nameof(Person.PersonName), "John");
+            List<PersonResponse> allPersons_from_Search = await _personsService.GetFilteredPersons(nameof(Person.PersonName), "John");
 
             // print allPersons
 
@@ -466,7 +479,7 @@ namespace Tests
             //Arrange
             List<PersonResponse> personResponses_fromAdditions = await AddSamplePersons();
             //Act
-            List<PersonResponse> allPersons_sorted = await _PersonsService.GetSortedPersons(personResponses_fromAdditions, nameof(Person.PersonName), SortOrderOptions.DESC);
+            List<PersonResponse> allPersons_sorted = await _personsService.GetSortedPersons(personResponses_fromAdditions, nameof(Person.PersonName), SortOrderOptions.DESC);
             // print allPersons
             _testOutputHelper.WriteLine("actual: ");
             foreach (PersonResponse pr in allPersons_sorted)
@@ -494,7 +507,7 @@ namespace Tests
             //Arrange
             PersonUpdateRequest? personUpdateRequest = null;
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _personsService.UpdatePerson(personUpdateRequest));
         }
 
         // When we supply with null value as PersonName it should throw argumentException
@@ -504,7 +517,7 @@ namespace Tests
             //Arrange
             PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { PersonName = null };
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
+            await Assert.ThrowsAsync<ArgumentException>(() => _personsService.UpdatePerson(personUpdateRequest));
         }
 
         // When we supply with invalid PersonID it should throw argumentException
@@ -515,7 +528,7 @@ namespace Tests
             AddSamplePersons();
             PersonUpdateRequest? personUpdateRequest = new PersonUpdateRequest() { PersonID = Guid.NewGuid(), PersonName = "Mr.house" };
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _PersonsService.UpdatePerson(personUpdateRequest));
+            await Assert.ThrowsAsync<ArgumentException>(() => _personsService.UpdatePerson(personUpdateRequest));
         }
 
         //proper update should update the person details
@@ -538,7 +551,7 @@ namespace Tests
                 ReceiveNewsLetters = !personToUpdate.ReceiveNewsLetters,
             };
             //Act
-            PersonResponse person_Response_From_Update = await _PersonsService.UpdatePerson(personUpdateRequest);
+            PersonResponse person_Response_From_Update = await _personsService.UpdatePerson(personUpdateRequest);
 
             //Assert
             Assert.Equal(personUpdateRequest.PersonID, person_Response_From_Update.PersonID);
@@ -562,7 +575,7 @@ namespace Tests
             //Arrange
             Guid? personID = null;
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _PersonsService.DeletePerson(personID));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _personsService.DeletePerson(personID));
         }
 
         //if personID is invalid, it should throw argumentException
@@ -573,7 +586,7 @@ namespace Tests
             AddSamplePersons();
             Guid personID = Guid.NewGuid();
             //Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _PersonsService.DeletePerson(personID));
+            await Assert.ThrowsAsync<ArgumentException>(() => _personsService.DeletePerson(personID));
         }
 
         //if personID is valid, it should delete the person
@@ -584,8 +597,8 @@ namespace Tests
             List<PersonResponse> personResponses_fromAdditions = await AddSamplePersons();
             PersonResponse personToDelete = personResponses_fromAdditions[0];
             //Act
-            _PersonsService.DeletePerson(personToDelete.PersonID);
-            List<PersonResponse> allPersons = await _PersonsService.GetAllPersons();
+            await _personsService.DeletePerson(personToDelete.PersonID);
+            List<PersonResponse> allPersons = await _personsService.GetAllPersons();
             //Assert
             Assert.DoesNotContain(personToDelete, allPersons);
         }
