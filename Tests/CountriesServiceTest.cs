@@ -7,6 +7,8 @@ using ServiceContracts.DTO;
 using Services;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using EntityFrameworkCoreMock;
+using Moq;
 
 namespace Tests
 {
@@ -16,7 +18,17 @@ namespace Tests
 
         public CountriesServiceTest()
         {
-            _CountriesService = new CountriesService(new PersonsDbContext(new DbContextOptionsBuilder<PersonsDbContext>().Options));
+            var countriesInitialData = new List<Country>();
+
+            DbContextMock<ApplicationDbContext> dbContextMock = new DbContextMock<ApplicationDbContext>(
+                new DbContextOptionsBuilder<ApplicationDbContext>().Options
+                );
+
+            dbContextMock.CreateDbSetMock(temp => temp.Countries, countriesInitialData);
+
+            var dbContext = dbContextMock.Object;
+
+            _CountriesService = new CountriesService(dbContext);
         }
 
         #region AddCountry

@@ -10,10 +10,10 @@ namespace Services
     public class CountriesService : ICountriesService
     {
         //private field
-        private readonly PersonsDbContext _DbContext;
+        private readonly ApplicationDbContext _DbContext;
 
         //constructor
-        public CountriesService(PersonsDbContext personsDbContext)
+        public CountriesService(ApplicationDbContext personsDbContext)
         {
             _DbContext = personsDbContext;
         }
@@ -71,38 +71,39 @@ namespace Services
             return country_response_from_list.ToCountryResponse();
         }
 
-        public async Task<int> UploadCountriesFromExcelFileAsync(IFormFile formFile)
+        public async Task<int> UploadCountriesFromExcelFile(IFormFile formFile)
         {
-            int addedCountriesCount = 0;
             MemoryStream memoryStream = new MemoryStream();
             await formFile.CopyToAsync(memoryStream);
+            int countriesInserted = 0;
 
             using (ExcelPackage excelPackage = new ExcelPackage(memoryStream))
             {
-                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets["Countries"];
+                ExcelWorksheet workSheet = excelPackage.Workbook.Worksheets["Countries"];
 
-                int rowCount = worksheet.Dimension.Rows;
+                int rowCount = workSheet.Dimension.Rows;
 
                 for (int row = 2; row <= rowCount; row++)
                 {
-                    string? cellValue = Convert.ToString(worksheet.Cells[row, 1].Value);
+                    string? cellValue = Convert.ToString(workSheet.Cells[row, 1].Value);
 
                     if (!string.IsNullOrEmpty(cellValue))
                     {
-                        string? countryName = cellValue.Trim();
+                        string? countryName = cellValue;
+
                         if (_DbContext.Countries.Where(temp => temp.CountryName == countryName).Count() == 0)
                         {
                             Country country = new Country() { CountryName = countryName };
-
-                            await _DbContext.Countries.AddAsync(country);
+                            _DbContext.Countries.Add(country);
                             await _DbContext.SaveChangesAsync();
-                            addedCountriesCount++;
+
+                            countriesInserted++;
                         }
                     }
                 }
             }
 
-            return addedCountriesCount;
+            return countriesInserted;
         }
     }
 }

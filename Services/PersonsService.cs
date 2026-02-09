@@ -19,10 +19,10 @@ namespace Services
         //private field
         private readonly ICountriesService _countriesService;
 
-        private readonly PersonsDbContext _DbContext;
+        private readonly ApplicationDbContext _DbContext;
 
         //constructor
-        public PersonsService(PersonsDbContext personsDbContext, ICountriesService countriesService)
+        public PersonsService(ApplicationDbContext personsDbContext, ICountriesService countriesService)
         {
             _DbContext = personsDbContext;
             _countriesService = countriesService;

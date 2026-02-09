@@ -31,7 +31,7 @@ namespace ServiceContracts
         Task<CountryResponse?> GetCountryByCountryID(Guid? countryID);
 
         /// <summary>
-        /// Uploads country data from the specified Excel file asynchronously and returns the number of countries
+        /// Uploads country data from the specified Excel file and returns the number of countries
         /// successfully processed.
         /// </summary>
         /// <remarks>Ensure that the provided Excel file adheres to the expected format for country data.
@@ -39,8 +39,8 @@ namespace ServiceContracts
         /// process.</remarks>
         /// <param name="formFile">The Excel file containing country data to be uploaded. This parameter must not be null and should be in a
         /// valid Excel format.</param>
-        /// <returns>A task that represents the asynchronous operation. The task result contains the number of countries that
+        /// <returns>A task that represents the operation. The task result contains the number of countries that
         /// were successfully uploaded from the Excel file.</returns>
-        Task<int> UploadCountriesFromExcelFileAsync(IFormFile formFile);
+        Task<int> UploadCountriesFromExcelFile(IFormFile formFile);
     }
 }
