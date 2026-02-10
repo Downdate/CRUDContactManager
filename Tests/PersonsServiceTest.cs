@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
+using AutoFixture;
 
 namespace Tests
 {
@@ -20,6 +21,7 @@ namespace Tests
         //private fields
         private readonly IPersonsService _personsService;
 
+        private readonly IFixture _fixture;
         private readonly ICountriesService _countriesService;
         private readonly ITestOutputHelper _testOutputHelper;
 
@@ -27,6 +29,8 @@ namespace Tests
 
         public PersonsServiceTest(ITestOutputHelper testOutputHelper)
         {
+            _fixture = new Fixture();
+
             var countriesInitialData = new List<Country>();
             var personsInitialData = new List<Person>();
 
@@ -293,7 +297,9 @@ namespace Tests
         public async Task AddPerson_PersonNameNull()
         {
             //Arrange
-            PersonAddRequest? personAddRequest = new PersonAddRequest() { PersonName = null };
+            PersonAddRequest? personAddRequest = _fixture.Build<PersonAddRequest>()
+                                                         .With(temp => temp.PersonName, null as string)
+                                                         .Create();
             //Act & Assert
             await Assert.ThrowsAsync<ArgumentException>(() => _personsService.AddPerson(personAddRequest));
         }
@@ -302,16 +308,9 @@ namespace Tests
         public async Task AddPerson_ProperPersonDetails()
         {
             //Arrange
-            PersonAddRequest? personAddRequest = new PersonAddRequest()
-            {
-                PersonName = "Dan",
-                Address = "123 Street, City",
-                DateOfBirth = new DateTime(1990, 1, 1),
-                CountryID = Guid.NewGuid(),
-                Email = "asd@gmail.com",
-                Gender = GenderOptions.Male,
-                ReceiveNewsLetters = true,
-            };
+            PersonAddRequest? personAddRequest = _fixture.Build<PersonAddRequest>()
+                                                         .With(temp => temp.Email, "abc@example.com")
+                                                         .Create();
             //Act
             PersonResponse personResponse = await _personsService.AddPerson(personAddRequest);
             List<PersonResponse> allPersons = await _personsService.GetAllPersons();
