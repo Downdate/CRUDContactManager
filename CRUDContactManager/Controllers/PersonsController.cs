@@ -1,4 +1,5 @@
-﻿using CRUDContactManager.ViewModels.Persons;
+﻿using CRUDContactManager.Filters.ActionFilters;
+using CRUDContactManager.ViewModels.Persons;
 using Microsoft.AspNetCore.Mvc;
 using Rotativa.AspNetCore;
 using ServiceContracts;
@@ -26,6 +27,7 @@ namespace CRUDContactManager.Controllers
 
         [Route("[Action]")]
         [Route("/")]
+        [TypeFilter(typeof(PersonsListActionFilter))]
         public async Task<IActionResult> Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
             //Search
