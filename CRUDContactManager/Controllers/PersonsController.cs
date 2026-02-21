@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace CRUDContactManager.Controllers
 {
     [Route("[Controller]")]
+    
     public class PersonsController : Controller
     {
         //private fields
@@ -24,7 +25,7 @@ namespace CRUDContactManager.Controllers
             _personsService = personsService;
             _countriesService = countriesService;
         }
-
+        
         [Route("[Action]")]
         [Route("/")]
         [TypeFilter(typeof(PersonsListActionFilter))]
