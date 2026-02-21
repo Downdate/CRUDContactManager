@@ -32,19 +32,9 @@ namespace CRUDContactManager.Controllers
         public async Task<IActionResult> Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
             //Search
-            ViewBag.SearchFields = new Dictionary<string, string>()
-            {
-                {nameof(PersonResponse.PersonName) , "Person Name" },
-                {nameof(PersonResponse.Email) , "Email Address" },
-                {nameof(PersonResponse.DateOfBirth) , "Date of Birth" },
-                {nameof(PersonResponse.Country), "Country" },
-                {nameof(PersonResponse.Age), "Age" },
-                {nameof(PersonResponse.Gender),"Gender" }
-            };
             List<PersonResponse> persons = await _personsService.GetFilteredPersons(searchBy, searchString);
 
-            ViewBag.CurrentSearchBy = searchBy;
-            ViewBag.CurrentSearchString = searchString;
+
 
             //Sorting
             ViewBag.Columns = new Dictionary<string, string>()

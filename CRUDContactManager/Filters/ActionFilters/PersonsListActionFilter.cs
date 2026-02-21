@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CRUDContactManager.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using ServiceContracts.DTO;
 
@@ -17,10 +18,52 @@ namespace CRUDContactManager.Filters.ActionFilters
         {
             // To do: add after action execution logic here
             _logger.LogInformation("PersonsListActionFilter: OnActionExecuted method is executing");
+
+            PersonsController personsController = (PersonsController)context.Controller;
+
+            IDictionary<string, object?>? parameters = (IDictionary<string, object?>?)context.HttpContext.Items["arguments"];
+
+            if (parameters != null) 
+            {
+                if (parameters.ContainsKey("Currentarguments")) 
+                {
+                    personsController.ViewData["CurrentsearchBy"] = Convert.ToString(parameters["CurrentsearchBy"]);
+                }
+
+                if (parameters.ContainsKey("CurrentsearchString")) 
+                {
+                    personsController.ViewData["CurrentsearchString"] = Convert.ToString(parameters["CurrentsearchString"]);
+                }
+
+                if (parameters.ContainsKey("CurrentSortBy")) 
+                {
+                    personsController.ViewData["CurrentSortBy"] = Convert.ToString(parameters["CurrentSortBy"]);
+                }
+
+                if (parameters.ContainsKey("CurrentSortOrder")) 
+                {
+                    personsController.ViewData["CurrentSortOrder"] = Convert.ToString(parameters["CurrentsortOrder"]);
+                }
+            }
+
+            personsController.ViewBag.SearchFields = new Dictionary<string, string>()
+            {
+                {nameof(PersonResponse.PersonName) , "Person Name" },
+                {nameof(PersonResponse.Email) , "Email Address" },
+                {nameof(PersonResponse.DateOfBirth) , "Date of Birth" },
+                {nameof(PersonResponse.Country), "Country" },
+                {nameof(PersonResponse.Age), "Age" },
+                {nameof(PersonResponse.Gender),"Gender" }
+            };
+            
+
+
         }
         
         public void OnActionExecuting(ActionExecutingContext context)
         {
+            context.HttpContext.Items["arguments"] = context.ActionArguments;
+
             // To do: add before action execution logic here 
             _logger.LogInformation("PersonsListActionFilter: OnActionExecuting method is executing");
 
