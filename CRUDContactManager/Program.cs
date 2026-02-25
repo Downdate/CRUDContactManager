@@ -5,6 +5,17 @@ using Entities;
 using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Logging
+builder.Host.ConfigureLogging(loggingProvider =>
+{
+    loggingProvider.ClearProviders();
+    loggingProvider.AddConsole();
+    loggingProvider.AddDebug();
+    loggingProvider.AddEventLog();
+});
+
+
 builder.Services.AddControllersWithViews();
 
 //add services into IoC container
@@ -18,12 +29,18 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 ExcelPackage.License.SetNonCommercialPersonal("Downdate");
 
+//Adding Http Logging to builder
+builder.Services.AddHttpLogging();
+
 var app = builder.Build();
+
 
 if (builder.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+//Http Logging
+app.UseHttpLogging();
 
 //app.Logger.LogDebug("debug-message");
 //app.Logger.LogInformation("Information-message");

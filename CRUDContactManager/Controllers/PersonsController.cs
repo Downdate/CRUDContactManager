@@ -16,21 +16,26 @@ namespace CRUDContactManager.Controllers
     {
         //private fields
         private readonly IPersonsService _personsService;
-
         private readonly ICountriesService _countriesService;
+        private readonly ILogger<PersonsController> _logger;
 
         //constructor
-        public PersonsController(IPersonsService personsService, ICountriesService countriesService)
+        public PersonsController(IPersonsService personsService, ICountriesService countriesService, ILogger<PersonsController> logger)
         {
             _personsService = personsService;
             _countriesService = countriesService;
+            _logger = logger;
         }
         
         [Route("[Action]")]
         [Route("/")]
         [TypeFilter(typeof(PersonsListActionFilter))]
+        [TypeFilter(typeof(ResponseHeaderActionFilter), Arguments = new Object[] { "X-Custom-Key", "Custom-Value" })]
         public async Task<IActionResult> Index(string searchBy, string searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
+            //Log
+            _logger.LogInformation("Index action method of PersonsController");
+
             //Search
             List<PersonResponse> persons = await _personsService.GetFilteredPersons(searchBy, searchString);
 
@@ -58,6 +63,9 @@ namespace CRUDContactManager.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            //Log
+            _logger.LogInformation("Create HttpGet action method of PersonsController");
+
             CreatePersonViewModel model = new CreatePersonViewModel();
             model.Countries = await _countriesService.GetAllCountries();
 
