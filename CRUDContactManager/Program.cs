@@ -3,16 +3,17 @@ using Services;
 using Microsoft.EntityFrameworkCore;
 using Entities;
 using OfficeOpenXml;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Logging
-builder.Host.ConfigureLogging(loggingProvider =>
+//Serilog
+builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider services, LoggerConfiguration loggerConfiguration) => 
 {
-    loggingProvider.ClearProviders();
-    loggingProvider.AddConsole();
-    loggingProvider.AddDebug();
-    loggingProvider.AddEventLog();
+    //Read Serilog configuration from appsettings.json
+    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+    //Read Serilog configuration from services (IoC container), making it possible to access Services in Serilog
+    loggerConfiguration.ReadFrom.Services(services);
 });
 
 
