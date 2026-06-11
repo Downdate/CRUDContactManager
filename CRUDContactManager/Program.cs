@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Serilog
 builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider services, LoggerConfiguration loggerConfiguration) => 
 {
-    //Read Serilog configuration from appsettings.json
+    //Read Serilog configuration from built-in IConfiguration
     loggerConfiguration.ReadFrom.Configuration(context.Configuration);
     //Read Serilog configuration from services (IoC container), making it possible to access Services in Serilog
     loggerConfiguration.ReadFrom.Services(services);
