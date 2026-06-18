@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Entities;
 using OfficeOpenXml;
 using Serilog;
+using CRUDContactManager.Filters.ActionFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,14 @@ builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider services, 
     loggerConfiguration.ReadFrom.Configuration(context.Configuration);
     //Read Serilog configuration from services (IoC container), making it possible to access Services in Serilog
     loggerConfiguration.ReadFrom.Services(services);
+});
+
+//it adds filters globally to all action methods of all controllers
+builder.Services.AddControllersWithViews(options =>
+{
+    var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<ResponseHeaderActionFilter>>();
+    options.Filters.Add(new ResponseHeaderActionFilter(logger, "X-Global-Custom-Key", "Global-Custom-Value"));
+    
 });
 
 
