@@ -348,7 +348,7 @@ For issues, questions, or feature requests, please open an [Issue](https://githu
 
 ---
 
-**Last Updated**: 2025  
+
 **Status**: Active Development ✅
 
 ---
@@ -707,7 +707,7 @@ dotnet ef database update
 
 ---
 
-**آخرین بروزرسانی**: 1403  
+
 **وضعیت**: توسعه فعال ✅
 
 </div>
