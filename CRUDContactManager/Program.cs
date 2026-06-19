@@ -5,6 +5,7 @@ using Entities;
 using OfficeOpenXml;
 using Serilog;
 using CRUDContactManager.Filters.ActionFilters;
+using CRUDContactManager;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,30 +18,8 @@ builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider services, 
     loggerConfiguration.ReadFrom.Services(services);
 });
 
-//it adds filters globally to all action methods of all controllers
-builder.Services.AddControllersWithViews(options =>
-{
-    var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<ResponseHeaderActionFilter>>();
-    options.Filters.Add(new ResponseHeaderActionFilter(logger, "X-Global-Custom-Key", "Global-Custom-Value"));
-    
-});
-
-
-builder.Services.AddControllersWithViews();
-
-//add services into IoC container
-builder.Services.AddScoped<ICountriesService, CountriesService>();
-builder.Services.AddScoped<IPersonsService, PersonsService>();
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
-ExcelPackage.License.SetNonCommercialPersonal("Downdate");
-
-//Adding Http Logging to builder
-builder.Services.AddHttpLogging();
+//extension method for adding services into IoC container, defined in ConfigureServicesExtension class in StartupExtensions folder
+builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 
