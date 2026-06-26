@@ -1,5 +1,4 @@
-﻿﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -13,6 +12,13 @@
 
 </head>
 <body>
+    <div style="text-align:right; margin:10px 20px 0 0;">
+        <label class="night-switch">
+            <input type="checkbox" id="nightModeToggle" />
+            <span class="night-slider"></span>
+        </label>
+        <span style="margin-left:8px;">Night Mode</span>
+    </div>
     <div class="container">
         <div class="page-content">
 
@@ -38,6 +44,7 @@
                         </div>
 
                     </div>
+
                 </div>
 
             </div>
@@ -58,6 +65,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+                           document.addEventListener("DOMContentLoaded", function () {
+                const toggle = document.getElementById("nightModeToggle");
+
+                if (localStorage.getItem("nightMode") === "on") {
+                    document.body.classList.add("night-mode");
+                    if (toggle) toggle.checked = true;
+                }
+
+                if (toggle) {
+                    toggle.addEventListener("change", function () {
+                        if (this.checked) {
+                            document.body.classList.add("night-mode");
+                            localStorage.setItem("nightMode", "on");
+                        } else {
+                            document.body.classList.remove("night-mode");
+                            localStorage.setItem("nightMode", "off");
+                        }
+                    });
+                }
+            });
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>
