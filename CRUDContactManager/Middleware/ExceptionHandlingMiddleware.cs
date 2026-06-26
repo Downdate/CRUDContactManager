@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Serilog;
 using System.Threading.Tasks;
 
 namespace CRUDContactManager.Middleware
@@ -8,10 +9,14 @@ namespace CRUDContactManager.Middleware
     public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionHandlingMiddleware> _logger ;
+        private readonly IDiagnosticContext _diagnosticContext ;
 
-        public ExceptionHandlingMiddleware(RequestDelegate next)
+        public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger, IDiagnosticContext diagnosticContext)
         {
             _next = next; // represents the subsequent middleware
+            _logger = logger;
+            _diagnosticContext = diagnosticContext;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -23,7 +28,17 @@ namespace CRUDContactManager.Middleware
             }
             catch(Exception ex)
             {
+                if (ex.InnerException != null)
+                {
+                    _logger.LogError(ex.InnerException, "An exception occurred in the application: {Message}", ex.InnerException.Message);
 
+                }
+                else 
+                {
+                    _logger.LogError("{ExceptionType} {ExceptionMessage}", ex.GetType().ToString(), ex.Message);
+                }
+
+                await httpContext.Response.WriteAsync("Error occurred");
             }
 
         }
