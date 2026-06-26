@@ -6,6 +6,7 @@ using OfficeOpenXml;
 using Serilog;
 using CRUDContactManager.Filters.ActionFilters;
 using CRUDContactManager;
+using CRUDContactManager.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,10 @@ var app = builder.Build();
 if (builder.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandlingMiddleware();
 }
 //Http Logging
 app.UseHttpLogging();
