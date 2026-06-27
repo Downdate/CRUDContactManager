@@ -749,3 +749,12 @@ body.night-mode {
     .night-switch input:checked + .night-slider::before {
         transform: translateX(20px);
     }
+
+/*Error*/
+
+.error-div{
+    align-self:center;
+    align-content:center;
+    align-items:center;
+    text-align: center;
+}
