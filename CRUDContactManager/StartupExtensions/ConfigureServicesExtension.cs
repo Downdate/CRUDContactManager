@@ -1,7 +1,6 @@
 ﻿using CRUDContactManager.Filters.ActionFilters;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using OfficeOpenXml;
 using ServiceContracts;
 using Services;
 
@@ -9,32 +8,45 @@ namespace CRUDContactManager
 {
     public static class ConfigureServicesExtension
     {
-        public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //it adds filters globally to all action methods of all controllers
-            services.AddControllersWithViews(options =>
-            {
-                var logger = services.BuildServiceProvider().GetRequiredService<ILogger<ResponseHeaderActionFilter>>();
-                options.Filters.Add(new ResponseHeaderActionFilter(logger, "X-Global-Custom-Key", "Global-Custom-Value"));
+            
 
+            //it adds controllers and views as services
+            services.AddControllersWithViews(options => {
+                //options.Filters.Add<ResponseHeaderActionFilter>(5);
+
+                var logger = services.BuildServiceProvider().GetRequiredService<ILogger<ResponseHeaderActionFilter>>();
+
+                options.Filters.Add(new ResponseHeaderActionFilter(logger,"My-Key-From-Global","My-Value-From-Global"));
             });
 
-
-            services.AddControllersWithViews();
-
             //add services into IoC container
-            services.AddScoped<ICountriesService, CountriesService>();
-            services.AddScoped<IPersonsService, PersonsService>();
+            
+
+            services.AddScoped<ICountriesGetterService, CountriesGetterService>();
+            services.AddScoped<ICountriesAdderService, CountriesAdderService>();
+            services.AddScoped<ICountriesUploaderService, CountriesUploaderService>();
+
+            services.AddScoped<IPersonsGetterService, PersonsGetterService>();
+            services.AddScoped<IPersonsAdderService, PersonsAdderService>();
+            services.AddScoped<IPersonsDeleterService, PersonsDeleterService>();
+            services.AddScoped<IPersonsUpdaterService, PersonsUpdaterService>();
+            services.AddScoped<IPersonsSorterService, PersonsSorterService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
-            ExcelPackage.License.SetNonCommercialPersonal("Downdate");
+            services.AddTransient<PersonsListActionFilter>();
 
-            //Adding Http Logging to builder
-            services.AddHttpLogging();
+            services.AddHttpLogging(options =>
+            {
+                options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestProperties | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponsePropertiesAndHeaders;
+            });
+
+            return services;
         }
     }
 }

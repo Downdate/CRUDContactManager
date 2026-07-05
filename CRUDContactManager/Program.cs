@@ -8,6 +8,7 @@ using CRUDContactManager.Filters.ActionFilters;
 using CRUDContactManager;
 using CRUDContactManager.Middleware;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Serilog

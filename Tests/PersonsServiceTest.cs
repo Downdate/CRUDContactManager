@@ -43,8 +43,10 @@ namespace Tests
 
             var dbContext = dbContextMock.Object;
 
-            _countriesService = new CountriesService(dbContext);
-            _personsService = new PersonsService(dbContext, _countriesService);
+            _countriesGetterService = new CountriesGetterService(dbContext);
+            _countriesAdderService = new CountriesAdderService(dbContext);
+            _countriesUploaderService = new CountriesUploaderService(dbContext);
+            _personsService = new PersonsGetterService(dbContext, _countriesService);
             _testOutputHelper = testOutputHelper;
         }
 

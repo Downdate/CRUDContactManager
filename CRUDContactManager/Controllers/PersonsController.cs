@@ -15,15 +15,27 @@ namespace CRUDContactManager.Controllers
     public class PersonsController : Controller
     {
         //private fields
-        private readonly IPersonsService _personsService;
-        private readonly ICountriesService _countriesService;
+        private readonly IPersonsAdderService _personsAdderService;
+        private readonly IPersonsDeleterService _personsDeleterService;
+        private readonly IPersonsGetterService _personsGetterService;
+        private readonly IPersonsSorterService _personsSorterService;
+        private readonly IPersonsUpdaterService _personsUpdaterService;
+        
+
+
+        private readonly ICountriesGetterService _countriesGetterService;
         private readonly ILogger<PersonsController> _logger;
 
         //constructor
-        public PersonsController(IPersonsService personsService, ICountriesService countriesService, ILogger<PersonsController> logger)
+        public PersonsController(IPersonsAdderService personsAdderService, IPersonsDeleterService personsDeleterService, IPersonsGetterService personsGetterService, IPersonsSorterService personsSorterService ,IPersonsUpdaterService personsUpdaterService , ICountriesGetterService countriesGetterService, ILogger<PersonsController> logger)
         {
-            _personsService = personsService;
-            _countriesService = countriesService;
+            _personsAdderService = personsAdderService;
+            _personsDeleterService = personsDeleterService;
+            _personsGetterService = personsGetterService;
+            _personsSorterService = personsSorterService;
+            _personsUpdaterService = personsUpdaterService;
+            _countriesGetterService = countriesGetterService;
+
             _logger = logger;
         }
         
@@ -37,7 +49,7 @@ namespace CRUDContactManager.Controllers
             _logger.LogInformation("Index action method of PersonsController");
 
             //Search
-            List<PersonResponse> persons = await _personsService.GetFilteredPersons(searchBy, searchString);
+            List<PersonResponse> persons = await _personsGetterService.GetFilteredPersons(searchBy, searchString);
 
 
 
@@ -51,7 +63,7 @@ namespace CRUDContactManager.Controllers
                 {nameof(PersonResponse.Age), "Age" },
                 {nameof(PersonResponse.Gender), "Gender" },
             };
-            persons = await _personsService.GetSortedPersons(persons, sortBy, sortOrder);
+            persons = await _personsSorterService.GetSortedPersons(persons, sortBy, sortOrder);
             ViewBag.CurrentSortBy = sortBy;
             ViewBag.CurrentSortOrder = sortOrder;
 
@@ -67,7 +79,7 @@ namespace CRUDContactManager.Controllers
             _logger.LogInformation("Create HttpGet action method of PersonsController");
 
             CreatePersonViewModel model = new CreatePersonViewModel();
-            model.Countries = await _countriesService.GetAllCountries();
+            model.Countries = await _countriesGetterService.GetAllCountries();
 
             return View(model);
         }
@@ -79,11 +91,11 @@ namespace CRUDContactManager.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Countries = await _countriesService.GetAllCountries();
+                model.Countries = await _countriesGetterService.GetAllCountries();
                 return View(model);
             }
 
-            await _personsService.AddPerson(model.Person);
+            await _personsAdderService.AddPerson(model.Person);
             return RedirectToAction("Index");
         }
 
@@ -93,8 +105,8 @@ namespace CRUDContactManager.Controllers
         public async Task<IActionResult> Update(Guid personID)
         {
             UpdatePersonViewModel model = new UpdatePersonViewModel();
-            model.Countries = await _countriesService.GetAllCountries();
-            PersonResponse? personResponse = await _personsService.GetPersonByPersonID(personID);
+            model.Countries = await _countriesGetterService.GetAllCountries();
+            PersonResponse? personResponse = await _personsGetterService.GetPersonByPersonID(personID);
             if (personResponse == null)
             {
                 return RedirectToAction("Index");
@@ -111,11 +123,11 @@ namespace CRUDContactManager.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Countries = await _countriesService.GetAllCountries();
+                model.Countries = await _countriesGetterService.GetAllCountries();
                 return View(model);
             }
 
-            await _personsService.UpdatePerson(model.Person);
+            await _personsUpdaterService.UpdatePerson(model.Person);
             return RedirectToAction("Index");
         }
 
@@ -124,7 +136,7 @@ namespace CRUDContactManager.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(Guid personID)
         {
-            PersonResponse? personResponse = await _personsService.GetPersonByPersonID(personID);
+            PersonResponse? personResponse = await _personsGetterService.GetPersonByPersonID(personID);
             if (personResponse == null)
             {
                 return RedirectToAction("Index");
@@ -137,7 +149,7 @@ namespace CRUDContactManager.Controllers
         [HttpPost]
         public IActionResult Delete(PersonResponse model)
         {
-            _personsService.DeletePerson(model.PersonID);
+            _personsDeleterService.DeletePerson(model.PersonID);
             return RedirectToAction("Index");
         }
 
@@ -145,7 +157,7 @@ namespace CRUDContactManager.Controllers
         public async Task<IActionResult> PersonsPDF()
         {
             //Get List of Persons
-            List<PersonResponse> persons = await _personsService.GetAllPersons();
+            List<PersonResponse> persons = await _personsGetterService.GetAllPersons();
             return new ViewAsPdf("PersonsPDF", persons, ViewData)
             {
                 PageMargins = new Rotativa.AspNetCore.Options.Margins(20, 20, 20, 20),
@@ -157,7 +169,7 @@ namespace CRUDContactManager.Controllers
         [Route("[Action]")]
         public async Task<IActionResult> PersonsCSV()
         {
-            MemoryStream memoryStream = await _personsService.GetPersonsCSV();
+            MemoryStream memoryStream = await _personsGetterService.GetPersonsCSV();
 
             return File(memoryStream, "application/octet-stream", "persons.csv");
         }
@@ -165,7 +177,7 @@ namespace CRUDContactManager.Controllers
         [Route("[Action]")]
         public async Task<IActionResult> PersonsExcel()
         {
-            MemoryStream memoryStream = await _personsService.GetPersonsExcel();
+            MemoryStream memoryStream = await _personsGetterService.GetPersonsExcel();
 
             return File(memoryStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "persons.xlsx");
         }
