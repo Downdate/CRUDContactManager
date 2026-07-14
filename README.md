@@ -708,6 +708,7 @@ dotnet ef database update
 ---
 
 
-**وضعیت**: توسعه فعال ✅
+**وضعیت**: پایان یافته ✅
+ادامه این پروژه در ریپازتوری جدید و با رعایت اصول Clean Architecture یا Onion Architecture انجام میشود
 
 </div>
