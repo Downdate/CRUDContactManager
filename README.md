@@ -1,8 +1,8 @@
 # CRUD Contact Manager
 
-this repository is finished and the updates will be added to the new ![Repository](https://github.com/Downdate/ContactsManagerSolution)
+this repository is finished and the updates will be added to the new .[Repository](https://github.com/Downdate/ContactsManagerSolution)
 
-این ریپازتوری به پایان رسیده. بروزرسانی ها در ![Repository](https://github.com/Downdate/ContactsManagerSolution)
+این ریپازتوری به پایان رسیده. بروزرسانی ها در .[Repository](https://github.com/Downdate/ContactsManagerSolution)
 
 A modern, full-featured contact management application built with **ASP.NET Core 10.0** and **Entity Framework Core**. Manage your contacts with ease using this clean, intuitive web application that supports advanced filtering, sorting, and multiple export formats.
 
